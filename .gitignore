@@ -4,8 +4,11 @@
 #     https://www.atlassian.com/git/tutorials/saving-changes/gitignore
 
 # Node artifact files
-node_modules/
-dist/
+node_modules
+dist
+dist-ssr
+coverage
+*.local
 
 # Compiled Java class files
 *.class
@@ -14,7 +17,13 @@ dist/
 *.py[cod]
 
 # Log files
+logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
 
 # Package files
 *.jar
@@ -23,8 +32,15 @@ dist/
 target/
 dist/
 
-# JetBrains IDE
-.idea/
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
 
 # Unit test reports
 TEST*.xml
@@ -48,3 +64,6 @@ Thumbs.db
 *.mov
 *.wmv
 
+# Project
+/cypress/videos/
+/cypress/screenshots/
