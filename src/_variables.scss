@@ -1,9 +1,12 @@
 $font-boxed: 'roboto-slab', serif;
 $font-strong: stolzl, sans-serif;
 $font-reader: poppins, sans-serif;
+$font-serif: georgiapro, sans-serif;
+$font-book: futura-pt-condensed, sans-serif;
 
 $color-cyan-1: #1b5d7f;
 $color-cyan-2: #3e8599;
 $color-cyan-3: #78c7c1;
 
 $gradient-cyan: linear-gradient(to left, $color-cyan-1 0%, $color-cyan-2 50%, $color-cyan-3 100%);
+$gradient-cyan-bright: linear-gradient(to left, $color-cyan-3 75%, $color-cyan-2);

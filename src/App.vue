@@ -1,13 +1,12 @@
 <template>
   <div class="resume-container py-5">
     <header class="header-top"></header>
-
-    <section class="resume-profile">
-      <div class="container">
-        <div class="row">
+    <div class="container">
+      <section class="resume-profile">
+        <div class="row align-items-center g-5">
           <div class="col col-4">
             <div class="resume-picture">
-              <img alt="" class="img-fluid" src="patryk-szram-ai.png" />
+              <img alt="" class="img-fluid d-block" src="patryk-szram-ai.png" />
             </div>
             <ul class="resume-contact">
               <li>
@@ -15,6 +14,9 @@
               </li>
               <li>
                 <a :href="`tel:${resume.contactPhone}`">{{ resume.contactPhone }}</a>
+              </li>
+              <li>
+                {{ resume.currentLocation }}
               </li>
             </ul>
           </div>
@@ -50,13 +52,13 @@
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
 
-    <section class="resume-career">
-      <div class="container">
-        <div class="row">
-          <div class="col col--sm">
+    <div class="container">
+      <section class="resume-career">
+        <div class="row g-5">
+          <div class="col col-4 text-end">
             <h4 class="resume-header">Umiejętności</h4>
             <ul class="resume-skills">
               <li v-for="(skill, index) in resume.skills.soft" :key="index">{{ skill }}</li>
@@ -70,18 +72,48 @@
               <li v-for="(skill, index) in resume.skills.tool" :key="index">{{ skill }}</li>
             </ul>
           </div>
-          <div class="col">
+          <div class="col col-8">
             <h2 class="resume-soft">Doświadczenie</h2>
             <div class="resume-timeline">
-              <div class="resume-timeline__company">
-                <div class="resume-company__logo"></div>
-                <h5 class="resume-company">Raiffeisen Bank International AG w Warszawie, Polska</h5>
-              </div>
+              <template v-for="c in 3" :key="c">
+                <div class="resume-timeline__logo ratio ratio-1x1">
+                  <img alt="" src="logo-raiffeisen.png" />
+                </div>
+                <div class="resume-timeline__point">
+                  <div class="resume-timeline__dot"></div>
+                  <div class="resume-timeline__dot__glow"></div>
+                </div>
+                <h3 class="resume-timeline__name">
+                  Raiffeisen Bank International AG w Warszawie, Polska
+
+                  <em class="resume-timeline__period"> 3 lat, 7 mies. </em>
+                </h3>
+                <template v-for="p in 3" :key="p">
+                  <div class="resume-timeline__date">
+                    <strong>LIS 2023</strong>
+                    <em>CZE 2021</em>
+                  </div>
+                  <div class="resume-timeline__point" style="--dot-size: 0.75rem">
+                    <div class="resume-timeline__dot"></div>
+                  </div>
+                  <div class="resume-timeline__details">
+                    <h3>Senior Frontend Developer</h3>
+                    <p>
+                      Do moich kluczowych obowiązków należało utrzymanie i rozwój wewnętrznej
+                      aplikacji internetowej CRM przeznaczonej dla wewnętrznych pracowników banku do
+                      obsługi klientów z całej europy. Zapewnienie najwyższej jakości kodu
+                      aplikacji, projektowanie i implementacja rozwiązań we współpracy z UX
+                      designerem. Bezustanna dbałość o pokrycie testami jednostkowymi na poziomie
+                      minimum 80% całego kodu źródłowego aplikacji.
+                    </p>
+                  </div>
+                </template>
+              </template>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+      </section>
+    </div>
   </div>
 </template>
 
@@ -123,6 +155,6 @@ const resume = reactive({
 })
 </script>
 
-<style lang="scss" scoped>
-@import 'variables';
+<style lang="scss">
+//@import 'variables';
 </style>
