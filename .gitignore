@@ -33,6 +33,7 @@ target/
 dist/
 
 # Editor directories and files
+.firebase
 .vscode/*
 !.vscode/extensions.json
 .idea
