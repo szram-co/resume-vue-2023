@@ -5,18 +5,7 @@
     <div class="container">
       <section class="resume-profile">
         <div class="row">
-          <div class="col col-4 text-center">
-            <a
-              target="_blank"
-              :href="link.url"
-              v-for="(link, key) in data.social"
-              :key="key"
-              :title="link.title"
-            >
-              <span :class="`bi ${link.icon} fs-2`"></span>
-            </a>
-          </div>
-          <div class="col col-8">
+          <div class="col col-8 offset-4">
             <h5 class="resume-boxed border border-3 d-inline-block border-dark mb-5">
               {{ positionTitle }}
             </h5>
@@ -26,7 +15,7 @@
         <div class="row align-items-start g-4">
           <div class="col col-4">
             <div class="resume-picture">
-              <img alt="" class="img-fluid d-block" src="patryk-szram-ai.png" />
+              <img alt="" class="img-fluid d-block" src="./assets/patryk-szram-ai.png" />
             </div>
             <ul class="resume-contact">
               <li>
@@ -35,10 +24,22 @@
               <li>
                 <a :href="`tel:${contactPhone}`" class="link-lg">{{ contactPhone }}</a>
               </li>
-              <li class="pt-5">
+              <li class="pt-4">
                 <a :href="`tel:${currentLocation}`">{{ currentLocation }}</a>
               </li>
             </ul>
+
+            <div class="resume-social">
+              <a
+                target="_blank"
+                :href="link.url"
+                v-for="(link, key) in data.social"
+                :key="key"
+                :title="link.title"
+              >
+                <span :class="`bi ${link.icon} fs-2`"></span>
+              </a>
+            </div>
           </div>
           <div class="col col-8">
             <h1 class="resume-hello fw-bold mb-5">
@@ -112,20 +113,20 @@ const data = reactive({
   ],
   toolsKeys: ['tools.photoshopIllustrator', 'tools.webpackBabel', 'tools.ciCd', 'tools.nodeNpm'],
   social: {
-    linkedin: {
-      icon: 'bi-linkedin',
-      url: 'http://in.szram.co',
-      title: 'in.szram.co'
-    },
-    facebook: {
-      icon: 'bi-facebook',
-      url: 'https://facebook.com',
-      title: 'facebook.com'
-    },
     github: {
       icon: 'bi-github',
       url: 'https://github.com/coderabbitpl',
       title: 'github.com/coderabbitpl'
+    },
+    linkedin: {
+      icon: 'bi-linkedin',
+      url: 'https://www.linkedin.com/in/patryk-szram/',
+      title: 'linkedin.com/in/patryk-szram'
+    },
+    behance: {
+      icon: 'bi-behance',
+      url: 'https://www.behance.net/patrykszram',
+      title: 'behance.net/patrykszram'
     }
   }
 })

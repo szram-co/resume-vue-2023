@@ -57,6 +57,13 @@
   background: $gradient-cyan;
 }
 
+.resume-social {
+  gap: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .resume-hello {
   font-size: 6rem;
   font-weight: 800;
