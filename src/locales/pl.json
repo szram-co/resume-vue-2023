@@ -1,0 +1,16 @@
+{
+  "switch": "Zmień język",
+  "welcome": "Cześć, jestem\nPatryk Szram.",
+  "jobTitle": "Fullstack Web Developer",
+  "currentLocation": "Grudziądz, Poland",
+  "bio": [
+    "Mam ponad dekadę doświadczenia w obszarze web developmentu. Koncentruję się na projektowaniu i rozwijaniu responsywnych aplikacji internetowych, dostosowywanych do potrzeb biznesowych klienta. Zajmuję się architekturą środowisk aplikacji, opracowywaniem struktury aplikacji, wyborem optymalnych technologii oraz rozwiązaniami pozwalającymi zadbać o produktywność rozwoju i wydajność aplikacji. Projektuję strategie usprawniające procesy związane z wdrażaniem i rozwojem aplikacji. Dodatkowo, posiadam umiejętności w zakresie projektowania grafiki przeznaczonej do publikacji oraz web designu opartego na znajomości najnowszych trendów UX/UI.",
+    "Jako Fullstack Web Developer ze znajomością JS/TS, SASS/LESS, PHP/SQL posiadam wszechstronne doświadczenie w sektorze web developmentu i e-commerce. Jestem zaangażowanym, szybko uczącym się samoukiem. Rozumiem dobre praktyki programowania, stawiane przede mną cele biznesowe oraz wymagania projektowe klientów. Zawsze pozostaję otwarty na nowe wyzwania. Kocham piłkę nożną i jestem dumnym ojcem dwójki wspaniałych dzieci."
+  ],
+  "header": {
+    "skills": "Umiejętności",
+    "technologies": "Technologie",
+    "tools": "Narzędzia",
+    "experience": "Doświadczenie"
+  }
+}
