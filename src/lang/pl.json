@@ -1,8 +1,7 @@
 {
-  "switch": "Zmień język",
-  "welcome": "Cześć, jestem\nPatryk Szram.",
-  "jobTitle": "Fullstack Web Developer",
-  "currentLocation": "Grudziądz, Poland",
+  "fullName": "Patryk Szram",
+  "welcome": "Witaj, jestem",
+  "location": "Grudziądz, Polska",
   "bio": [
     "Mam ponad dekadę doświadczenia w obszarze web developmentu. Koncentruję się na projektowaniu i rozwijaniu responsywnych aplikacji internetowych, dostosowywanych do potrzeb biznesowych klienta. Zajmuję się architekturą środowisk aplikacji, opracowywaniem struktury aplikacji, wyborem optymalnych technologii oraz rozwiązaniami pozwalającymi zadbać o produktywność rozwoju i wydajność aplikacji. Projektuję strategie usprawniające procesy związane z wdrażaniem i rozwojem aplikacji. Dodatkowo, posiadam umiejętności w zakresie projektowania grafiki przeznaczonej do publikacji oraz web designu opartego na znajomości najnowszych trendów UX/UI.",
     "Jako Fullstack Web Developer ze znajomością JS/TS, SASS/LESS, PHP/SQL posiadam wszechstronne doświadczenie w sektorze web developmentu i e-commerce. Jestem zaangażowanym, szybko uczącym się samoukiem. Rozumiem dobre praktyki programowania, stawiane przede mną cele biznesowe oraz wymagania projektowe klientów. Zawsze pozostaję otwarty na nowe wyzwania. Kocham piłkę nożną i jestem dumnym ojcem dwójki wspaniałych dzieci."
@@ -12,5 +11,33 @@
     "technologies": "Technologie",
     "tools": "Narzędzia",
     "experience": "Doświadczenie"
+  },
+  "skills": {
+    "understandingBusinessGoals": "Zrozumienie celów biznesowych",
+    "adaptingToNewTechnologies": "Adaptacja do nowych technologii",
+    "planningScalableArchitecture": "Planowanie skalowalnej architektury",
+    "ensuringAppQualityTesting": "Dbałość o jakość i testowanie aplikacji",
+    "empathyInTeamRelationships": "Empatia w relacjach zespołowych",
+    "proactiveEfficiencySeeking": "Proaktywne poszukiwanie efektywności",
+    "independenceAndInitiative": "Samodzielność i inicjatywa",
+    "creativityInProblemSolving": "Kreatywność w rozwiązywaniu wyzwań",
+    "abilityToLearnQuickly": "Zdolność do szybkiego uczenia się",
+    "uxUiInterfaceDesign": "Projektowanie interfejsów UX/UI"
+  },
+  "technologies": {
+    "javascriptTypescript": "JavaScript/TypeScript",
+    "angularVue": "Angular/Vue",
+    "phpSql": "PHP/SQL",
+    "sassLess": "SASS/LESS",
+    "materialUiBootstrap": "Material UI/Bootstrap",
+    "pwaSpa": "PWA/SPA",
+    "linuxOsx": "LINUX/OS X",
+    "git": "GIT"
+  },
+  "tools": {
+    "photoshopIllustrator": "Photoshop/Illustrator",
+    "webpackBabel": "Webpack/Babel",
+    "ciCd": "CI/CD",
+    "nodeNpm": "NODE/NPM"
   }
 }

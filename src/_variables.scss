@@ -1,8 +1,14 @@
-$font-boxed: 'roboto-slab', serif;
-$font-strong: stolzl, sans-serif;
-$font-reader: poppins, sans-serif;
-$font-serif: georgiapro, sans-serif;
-$font-book: futura-pt-condensed, sans-serif;
+// Default font family
+$font-base: proxima-nova, sans-serif;
+
+// Thin font
+$font-cond: roboto-condensed, sans-serif;
+
+// Massive font weight
+$font-head: stolzl, sans-serif;
+
+// Serif font style
+$font-display: proxima-sera, serif;
 
 $color-cyan-1: #1b5d7f;
 $color-cyan-2: #3e8599;

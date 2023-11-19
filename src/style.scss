@@ -1,13 +1,5 @@
 @import 'app';
 
-// Configuration
-@import 'bootstrap/scss/functions';
-@import 'bootstrap/scss/variables';
-@import 'bootstrap/scss/variables-dark';
-@import 'bootstrap/scss/maps';
-@import 'bootstrap/scss/mixins';
-@import 'bootstrap/scss/utilities';
-
 // Layout & components
 @import 'bootstrap/scss/root';
 @import 'bootstrap/scss/reboot';
@@ -19,7 +11,7 @@
 @import 'bootstrap/scss/forms';
 @import 'bootstrap/scss/buttons';
 @import 'bootstrap/scss/transitions';
-//@import 'bootstrap/scss/dropdown';
+@import 'bootstrap/scss/dropdown';
 //@import 'bootstrap/scss/button-group';
 //@import 'bootstrap/scss/nav';
 //@import 'bootstrap/scss/navbar';
@@ -35,7 +27,7 @@
 //@import 'bootstrap/scss/toasts';
 //@import 'bootstrap/scss/modal';
 //@import 'bootstrap/scss/tooltip';
-//@import 'bootstrap/scss/popover';
+@import 'bootstrap/scss/popover';
 //@import 'bootstrap/scss/carousel';
 //@import 'bootstrap/scss/spinners';
 //@import 'bootstrap/scss/offcanvas';
@@ -47,6 +39,9 @@
 // Utilities
 @import 'bootstrap/scss/utilities/api';
 
+// Icons
+@import 'bootstrap-icons/font/bootstrap-icons';
+
 // Custom
 .resume-container {
   padding-top: 6rem;
@@ -54,44 +49,26 @@
   margin: 0 auto;
 }
 
-.header-top {
-  position: fixed;
-  left: 0;
-  top: 0;
+.resume-line-x {
+  height: 3px;
   width: 100%;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  background: $gradient-cyan;
-
-  .text-switch {
-    opacity: 0;
-    color: $light;
-    font-size: 0.875rem;
-    padding-right: 1rem;
-    pointer-events: none;
-    transition: 0.2s opacity ease;
-  }
-
-  .col-switch:hover .text-switch {
-    opacity: 0.5;
-  }
-}
-
-.resume-profile {
-  border-bottom: 4px solid #000;
+  border-radius: 5px;
   margin-bottom: 3rem;
+  background: $gradient-cyan;
 }
 
 .resume-hello {
-  font-size: 5.5rem;
+  font-size: 6rem;
+  font-weight: 800;
   background: $gradient-cyan-bright;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .resume-boxed {
-  font-family: $font-boxed;
+  font-family: $font-display;
+  font-weight: 500;
+  font-size: 1.5rem;
   text-transform: uppercase;
   padding: 0.5rem 3rem;
   letter-spacing: 1px;
@@ -132,15 +109,13 @@
     }
 
     &.link-lg {
-      font-weight: 600;
-      font-size: 1.75rem;
+      font-weight: 700;
+      font-size: 2rem;
     }
   }
 }
 
 .resume-picture {
-  padding-top: 25%;
-
   img {
     width: 15rem;
     margin: 0 auto;
@@ -151,27 +126,6 @@
   font-size: 3rem;
   font-weight: bold;
   margin-bottom: 3rem;
-}
-
-.resume-header {
-  font-size: 1.5rem;
-  text-transform: uppercase;
-  line-height: 1;
-  margin-top: 1.5rem;
-  margin-bottom: 3rem;
-}
-
-.resume-skills {
-  display: block;
-  padding: 0;
-  margin: 0 0 3rem;
-  list-style: none;
-  line-height: 2.2;
-
-  li {
-    padding: 0;
-    margin: 0;
-  }
 }
 
 .resume-timeline {

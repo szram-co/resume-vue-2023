@@ -1,29 +1,29 @@
 <template>
   <div v-if="$t" class="resume-container">
-    <header class="header-top">
-      <div class="container">
+    <TopHeader />
+
+    <div class="container">
+      <section class="resume-profile">
         <div class="row">
-          <div class="col"></div>
-          <div class="col col-auto">
-            <div class="col-switch">
-              <span class="text-switch">{{ $t('switch') }}</span>
-              <button
-                v-for="(lang, i) in availableLocales"
-                :key="`language${i}`"
-                :hidden="lang === locale.valueOf()"
-                class="btn btn-sm btn-outline-light"
-                @click="changeLanguage(lang)"
-              >
-                {{ languages?.[lang] }}
-              </button>
-            </div>
+          <div class="col col-4 text-center">
+            <a
+              target="_blank"
+              :href="link.url"
+              v-for="(link, key) in data.social"
+              :key="key"
+              :title="link.title"
+            >
+              <span :class="`bi ${link.icon} fs-2`"></span>
+            </a>
+          </div>
+          <div class="col col-8">
+            <h5 class="resume-boxed border border-3 d-inline-block border-dark mb-5">
+              {{ positionTitle }}
+            </h5>
           </div>
         </div>
-      </div>
-    </header>
-    <div class="container-fluid">
-      <section class="resume-profile">
-        <div class="row align-items-start g-5">
+
+        <div class="row align-items-start g-4">
           <div class="col col-4">
             <div class="resume-picture">
               <img alt="" class="img-fluid d-block" src="patryk-szram-ai.png" />
@@ -41,10 +41,9 @@
             </ul>
           </div>
           <div class="col col-8">
-            <h5 class="resume-boxed border border-3 d-inline-block border-dark">
-              {{ positionTitle }}
-            </h5>
-            <h1 class="resume-hello fw-bold my-5" v-html="$t('welcome')"></h1>
+            <h1 class="resume-hello fw-bold mb-5">
+              {{ $t('welcome') }}<br />{{ $t('fullName') }}.
+            </h1>
             <div class="resume-description fs-5 fw-medium">
               <p v-for="(paragraph, index) in $tm('bio')" :key="index" class="mb-5">
                 {{ paragraph }}
@@ -53,40 +52,91 @@
           </div>
         </div>
       </section>
+
+      <div class="resume-line-x"></div>
+
+      <section class="resume-experience">
+        <div class="row align-items-start gx-4">
+          <div class="col col-4 text-end">
+            <SkillsList :title="$t('header.skills')" :list="data.skillsKeys" />
+            <SkillsList :title="$t('header.technologies')" :list="data.technologyKeys" />
+            <SkillsList :title="$t('header.tools')" :list="data.toolsKeys" />
+          </div>
+          <div class="col col-8">
+            <h2 class="resume-soft">
+              {{ $t('header.experience') }}
+            </h2>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { onMounted, ref } from 'vue'
+import TopHeader from './components/TopHeader.vue'
+import SkillsList from './components/SkillsList.vue'
+
+import { onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-
-const { locale, availableLocales } = useI18n({ useScope: 'global' })
-
-const languages = {
-  en: 'English',
-  pl: 'Polski'
-}
 
 const positionTitle = 'Fullstack Web Developer'
 const contactPhone = ref('+48795884999')
 const contactEmail = ref('patryk@szram.co')
-const currentLocation = ref('Grudziądz, Polska')
 
-const selectedLanguage = ref(localStorage.getItem('selectedLanguage') || 'pl')
+const { t } = useI18n({ useScope: 'global' })
+const currentLocation = t('location')
 
-const changeLanguage = (lang: string) => {
-  selectedLanguage.value = lang
-  localStorage.setItem('selectedLanguage', selectedLanguage.value)
-  locale.value = selectedLanguage.value
-}
+const data = reactive({
+  skillsKeys: [
+    'skills.understandingBusinessGoals',
+    'skills.adaptingToNewTechnologies',
+    'skills.planningScalableArchitecture',
+    'skills.ensuringAppQualityTesting',
+    'skills.empathyInTeamRelationships',
+    'skills.proactiveEfficiencySeeking',
+    'skills.independenceAndInitiative',
+    'skills.creativityInProblemSolving',
+    'skills.abilityToLearnQuickly',
+    'skills.uxUiInterfaceDesign'
+  ],
+  technologyKeys: [
+    'technologies.javascriptTypescript',
+    'technologies.angularVue',
+    'technologies.phpSql',
+    'technologies.sassLess',
+    'technologies.materialUiBootstrap',
+    'technologies.pwaSpa',
+    'technologies.linuxOsx',
+    'technologies.git'
+  ],
+  toolsKeys: ['tools.photoshopIllustrator', 'tools.webpackBabel', 'tools.ciCd', 'tools.nodeNpm'],
+  social: {
+    linkedin: {
+      icon: 'bi-linkedin',
+      url: 'http://in.szram.co',
+      title: 'in.szram.co'
+    },
+    facebook: {
+      icon: 'bi-facebook',
+      url: 'https://facebook.com',
+      title: 'facebook.com'
+    },
+    github: {
+      icon: 'bi-github',
+      url: 'https://github.com/coderabbitpl',
+      title: 'github.com/coderabbitpl'
+    }
+  }
+})
 
 const formatPhoneNumber = (phoneNumber: string): string => {
   const cleanNumber = phoneNumber.replace(/\D\+/g, '')
+  const maskedNumber = cleanNumber.replace('884', '000')
 
   if (cleanNumber.length > 0) {
     const regex = /.{1,3}/g
-    const formattedNumber = cleanNumber.match(regex) ?? []
+    const formattedNumber = maskedNumber.match(regex) ?? []
     return formattedNumber.join(' ').trim()
   }
 
@@ -95,10 +145,5 @@ const formatPhoneNumber = (phoneNumber: string): string => {
 
 onMounted(() => {
   contactPhone.value = formatPhoneNumber(contactPhone.value)
-  locale.value = selectedLanguage.value
 })
 </script>
-
-<style lang="scss">
-//@import 'variables';
-</style>

@@ -1,0 +1,43 @@
+{
+  "fullName": "Patryk Szram",
+  "welcome": "Hello, I’m",
+  "location": "Grudziądz, Poland",
+  "bio": [
+    "I have over a decade of experience in the field of web development. I focus on designing and developing responsive web applications tailored to the business needs of clients. My expertise includes application architecture, developing application structures, choosing optimal technologies, and implementing solutions to ensure the productivity and performance of applications. I design strategies to streamline processes related to the deployment and development of applications. Additionally, I possess skills in designing graphics for publication and web design based on knowledge of the latest UX/UI trends.",
+    "As a Fullstack Web Developer with proficiency in JS/TS, SASS/LESS, PHP/SQL, I have versatile experience in the web development and e-commerce sectors. I am a dedicated, fast-learning self-learner. I understand best programming practices, prioritize business goals, and meet client project requirements. I am always open to new challenges. I love soccer and am a proud father of two wonderful children."
+  ],
+  "header": {
+    "skills": "Skills",
+    "technologies": "Technologies",
+    "tools": "Tools",
+    "experience": "Experience"
+  },
+  "skills": {
+    "understandingBusinessGoals": "Understanding business goals",
+    "adaptingToNewTechnologies": "Adapting to new technologies",
+    "planningScalableArchitecture": "Planning scalable architecture",
+    "ensuringAppQualityTesting": "Ensuring app quality and testing",
+    "empathyInTeamRelationships": "Empathy in team relationships",
+    "proactiveEfficiencySeeking": "Proactive efficiency seeking",
+    "independenceAndInitiative": "Independence and initiative",
+    "creativityInProblemSolving": "Creativity in problem-solving",
+    "abilityToLearnQuickly": "Ability to learn quickly",
+    "uxUiInterfaceDesign": "UX/UI interface design"
+  },
+  "technologies": {
+    "javascriptTypescript": "JavaScript/TypeScript",
+    "angularVue": "Angular/Vue",
+    "phpSql": "PHP/SQL",
+    "sassLess": "SASS/LESS",
+    "materialUiBootstrap": "Material UI/Bootstrap",
+    "pwaSpa": "PWA/SPA",
+    "linuxOsx": "LINUX/OS X",
+    "git": "GIT"
+  },
+  "tools": {
+    "photoshopIllustrator": "Photoshop/Illustrator",
+    "webpackBabel": "Webpack/Babel",
+    "ciCd": "CI/CD",
+    "nodeNpm": "NODE/NPM"
+  }
+}
