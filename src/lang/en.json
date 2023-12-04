@@ -1,7 +1,7 @@
 {
+  "showContactDetails": "Show contact info",
   "fullName": "Patryk Szram",
   "welcome": "Hello, I’m",
-  "location": "Grudziądz, Poland",
   "bio": [
     "I have over a decade of experience in the field of web development. I focus on designing and developing responsive web applications tailored to the business needs of clients. My expertise includes application architecture, developing application structures, choosing optimal technologies, and implementing solutions to ensure the productivity and performance of applications. I design strategies to streamline processes related to the deployment and development of applications. Additionally, I possess skills in designing graphics for publication and web design based on knowledge of the latest UX/UI trends.",
     "As a Fullstack Web Developer with proficiency in JS/TS, SASS/LESS, PHP/SQL, I have versatile experience in the web development and e-commerce sectors. I am a dedicated, fast-learning self-learner. I understand best programming practices, prioritize business goals, and meet client project requirements. I am always open to new challenges. I love soccer and am a proud father of two wonderful children."
@@ -39,5 +39,45 @@
     "webpackBabel": "Webpack/Babel",
     "ciCd": "CI/CD",
     "nodeNpm": "NODE/NPM"
+  },
+  "city": {
+    "gdz": "Grudziadz",
+    "inWaw": "in Warsaw"
+  },
+  "country": {
+    "pl": "Poland"
+  },
+  "jobs": {
+    "raiffeisen": {
+      "senior": "In my role, I was responsible for maintaining and developing an internal CRM web application for internal bank employees to serve clients from across Europe. This involved ensuring the highest quality of application code, designing and implementing solutions in collaboration with UX designers. I consistently focused on achieving a minimum 80% unit test coverage for the entire source code of the application.",
+      "mid": "In my role, I was responsible for maintaining and developing an internal CRM web application for internal bank employees to serve clients from across Europe. This involved ensuring the highest quality of application code, designing and implementing solutions in collaboration with UX designers. I consistently focused on achieving a minimum 80% unit test coverage for the entire source code of the application."
+    },
+    "stabilis": {
+      "lead": "I was responsible for the complete technological transformation of web applications. I oversaw the transformation process, actively participated in technology selection, strategy planning, and recruitment processes. I rewrote applications from Polymer to the Vue framework while maintaining total integrity. I designed an application for drawing graphs based on BPMN 2.0 standards. This tool enabled the creation of optimized processes, significantly improving the efficiency of production halls for one of the leading manufacturers in the construction and metallurgical industry in Poland."
+    },
+    "movecloser": {
+      "fullstack": "I was responsible for overseeing project teams, with a primary focus on ensuring high-quality code delivery and efficient collaboration. As a team coordinator, I ensured coherence in technology selection and the effectiveness of team activities. I actively organized training sessions aimed at standardizing developers' approaches, eliminating errors, and enhancing the team's skills. My duties included comprehensive coordination throughout project implementation, from preparing the team environment to production deployment."
+    }
+  },
+  "dates": {
+    "present": "Present",
+    "years": "years",
+    "year": "year",
+    "months": "months",
+    "month": "month"
+  },
+  "months": {
+    "jan": "January",
+    "feb": "February",
+    "mar": "March",
+    "apr": "April",
+    "may": "May",
+    "jun": "June",
+    "jul": "July",
+    "aug": "August",
+    "sep": "September",
+    "oct": "October",
+    "nov": "November",
+    "dec": "December"
   }
 }

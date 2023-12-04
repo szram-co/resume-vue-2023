@@ -55,6 +55,7 @@ export default {
   align-items: center;
   background: $gradient-cyan;
   color: $light;
+  z-index: 1;
 }
 
 .switch-locale {

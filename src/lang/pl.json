@@ -1,7 +1,7 @@
 {
+  "showContactDetails": "Pokaż dane kontaktowe",
   "fullName": "Patryk Szram",
   "welcome": "Witaj, jestem",
-  "location": "Grudziądz, Polska",
   "bio": [
     "Mam ponad dekadę doświadczenia w obszarze web developmentu. Koncentruję się na projektowaniu i rozwijaniu responsywnych aplikacji internetowych, dostosowywanych do potrzeb biznesowych klienta. Zajmuję się architekturą środowisk aplikacji, opracowywaniem struktury aplikacji, wyborem optymalnych technologii oraz rozwiązaniami pozwalającymi zadbać o produktywność rozwoju i wydajność aplikacji. Projektuję strategie usprawniające procesy związane z wdrażaniem i rozwojem aplikacji. Dodatkowo, posiadam umiejętności w zakresie projektowania grafiki przeznaczonej do publikacji oraz web designu opartego na znajomości najnowszych trendów UX/UI.",
     "Jako Fullstack Web Developer ze znajomością JS/TS, SASS/LESS, PHP/SQL posiadam wszechstronne doświadczenie w sektorze web developmentu i e-commerce. Jestem zaangażowanym, szybko uczącym się samoukiem. Rozumiem dobre praktyki programowania, stawiane przede mną cele biznesowe oraz wymagania projektowe klientów. Zawsze pozostaję otwarty na nowe wyzwania. Kocham piłkę nożną i jestem dumnym ojcem dwójki wspaniałych dzieci."
@@ -39,5 +39,45 @@
     "webpackBabel": "Webpack/Babel",
     "ciCd": "CI/CD",
     "nodeNpm": "NODE/NPM"
+  },
+  "city": {
+    "gdz": "Grudziądz",
+    "inWaw": "w Warszawie"
+  },
+  "country": {
+    "pl": "Polska"
+  },
+  "jobs": {
+    "raiffeisen": {
+      "senior": "Do moich kluczowych obowiązków należało utrzymanie i rozwój wewnętrznej aplikacji internetowej CRM przeznaczonej dla wewnętrznych pracowników banku do obsługi klientów z całej europy. Zapewnienie najwyższej jakości kodu aplikacji, projektowanie i implementacja rozwiązań we współpracy z UX designerem. Bezustanna dbałość o pokrycie testami jednostkowymi na poziomie minimum 80% całego kodu źródłowego aplikacji.",
+      "mid": "Przed rozpoczęciem współpracy na stanowisku posiadałem wyłącznie teoretyczną wiedzę o technologii. Do pracy niezbędna była biegła znajomość frameworka Angular, NgXS oraz całkowite pojęcie zagadnień design systemu Material Design. To wszystko wraz z obsługą wszystkich narzędzi dookoła projektu stanowiło o wypełnieniu wszystkich wymagań i osiągnięcie stawianych przede mną celów biznesowych potrzebnych do uzyskania awansu na stanowisku."
+    },
+    "stabilis": {
+      "lead": "Odpowiadałem za całkowitą transformację technologiczną aplikacji internetowych. Nadzorowałem proces transformacji, aktywnie uczestnicząc przy wyborze technologii, planowaniu strategii oraz w procesach rekrutacyjnych. Przepisałem aplikacje z Polymer na framework Vue, zachowując przy tym całkowitą integralność. Zaprojektowałem aplikację do rysowania grafów, opierając się na standardach BPMN 2.0. Narzędzie umożliwiło tworzyć zoptymalizowane procesy, znacząco poprawiające wydajność hal produkcyjnych jednego z wiodących producentów z branży budowlanej i metalurgicznej w Polsce."
+    },
+    "movecloser": {
+      "fullstack": "Odpowiadałem za prace zespołów projektowych, priorytetem było zapewnienie wysokiej jakości dostarczanego kodu oraz efektywnej współpracy. Pełniąc funkcję koordynatora zespołu, dbałem o spójność w doborze technologii oraz efektywność działań. Aktywnie organizowałem szkolenia, mające na celu standaryzację podejścia developerów, eliminację błędów oraz rozwój umiejętności zespołu. Moje obowiązki obejmowały kompleksową koordynację przy realizacji projektów, począwszy od przygotowania środowiska dla zespołu, aż do deploymentu produkcyjnego."
+    }
+  },
+  "dates": {
+    "present": "Obecnie",
+    "years": "lata",
+    "year": "rok",
+    "months": "miesięcy",
+    "month": "miesiąc"
+  },
+  "months": {
+    "jan": "Styczeń",
+    "feb": "Luty",
+    "mar": "Marzec",
+    "apr": "Kwiecień",
+    "may": "Maj",
+    "jun": "Czerwiec",
+    "jul": "Lipiec",
+    "aug": "Sierpień",
+    "sep": "Wrzesień",
+    "oct": "Październik",
+    "nov": "Listopad",
+    "dec": "Grudzień"
   }
 }
