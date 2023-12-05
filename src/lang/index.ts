@@ -1,13 +1,11 @@
 // User defined lang
 import en from './en.json'
 import pl from './pl.json'
-
-import type { App } from 'vue'
 import { createI18n } from 'vue-i18n'
 
 const messages = { en, pl }
 
-const getLocale = () => {
+export const getLocale = () => {
   const cookieLanguage = sessionStorage.getItem('language')
   if (cookieLanguage) {
     return cookieLanguage
@@ -22,14 +20,9 @@ const getLocale = () => {
   return 'pl'
 }
 
-const i18n = createI18n({
+export const i18n = createI18n({
   legacy: false,
   globalInjection: true,
   locale: getLocale(),
   messages
 })
-
-// export default i18n
-export default (app: App<Element>): void => {
-  app.use(i18n)
-}

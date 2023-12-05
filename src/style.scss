@@ -1,3 +1,5 @@
+@use 'sass:math';
+
 @import 'app';
 
 // Layout & components
@@ -42,11 +44,17 @@
 // Icons
 @import 'bootstrap-icons/font/bootstrap-icons';
 
+::selection {
+  color: saturate(lighten($primary, 15%), 20%);
+  background: $secondary;
+}
+
 // Custom
 .resume-container {
-  padding-top: 6rem;
-  width: 80%;
+  padding: 5rem 0;
   margin: 0 auto;
+  transition: 0.2s all ease;
+  perspective: 1000px;
 }
 
 .resume-line-x {
@@ -140,10 +148,26 @@
 
 .resume-timeline {
   $logo-size: 5vw;
+  $line-gap-col: 1rem;
+  $line-gap-row: 1.5rem;
 
   display: grid;
+  row-gap: $line-gap-row;
+  column-gap: $line-gap-col;
   grid-template-columns: auto auto 1fr;
-  gap: 1rem;
+
+  &__company {
+    --dot-size: 12px;
+    --dot-primary: #{$primary};
+    --dot-secondary: var(--dot-primary);
+
+    display: contents;
+
+    & *::selection {
+      color: var(--dot-primary);
+      background: var(--dot-secondary);
+    }
+  }
 
   &__logo {
     width: $logo-size;
@@ -155,28 +179,54 @@
   }
 
   &__dot {
-    --dot-size: 8px;
-    --dot-color: #{$secondary};
+    --color-line-size: 2px;
 
-    width: 1.5rem;
-    height: 1.5rem;
-    justify-self: center;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    justify-self: center;
     justify-content: center;
     box-sizing: border-box;
+    position: relative;
+    width: calc(var(--dot-size) * 1.5);
+
+    &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 50%;
+      top: math.div($line-gap-row, 2) * -1;
+      transform: translateX(-50%);
+      width: var(--color-line-size);
+      height: calc(100% + $line-gap-row);
+      background: linear-gradient(to bottom, var(--dot-primary) 50%, var(--dot-secondary));
+    }
+
+    &--first::after {
+      top: 50%;
+    }
 
     i {
       box-sizing: border-box;
       display: block;
       width: var(--dot-size);
       height: var(--dot-size);
-      border-radius: 50%;
-      background: var(--dot-color);
-      position: relative;
-      border: 1px solid var(--dot-color);
+      position: absolute;
+      left: 50%;
+      top: math.div($line-gap-row, 2);
+      transform: translate(-50%, -50%);
+      z-index: 1;
 
       &::before {
+        content: '';
+        display: block;
+        width: var(--dot-size);
+        height: var(--dot-size);
+        border-radius: 50%;
+        background: var(--dot-primary);
+        border: 1px solid var(--dot-primary);
+      }
+
+      &::after {
         content: '';
         display: block;
         width: var(--dot-size);
@@ -185,7 +235,7 @@
         left: 50%;
         top: 50%;
         transform: translate(-50%, -50%) scale(2.5);
-        background: var(--dot-color);
+        background: var(--dot-primary);
         z-index: -1;
         border-radius: 50%;
         opacity: 0;
@@ -194,14 +244,17 @@
   }
 
   &__logo + &__dot {
-    --dot-size: 12px;
-
-    align-self: center;
+    --dot-size: 14px;
 
     i {
-      background: #fff;
+      top: 50%;
+      transform: translate(-50%, -50%);
 
       &::before {
+        background: #fff;
+      }
+
+      &::after {
         opacity: 0.1;
       }
     }
@@ -212,9 +265,13 @@
     font-size: 1.5rem;
     font-style: italic;
     align-self: center;
-    line-height: 1.2;
+    line-height: 1.5rem;
+    position: relative;
 
     em {
+      position: absolute;
+      left: 0;
+      top: 100%;
       display: block;
       font-size: 0.875rem;
       color: $gray-500;
@@ -226,6 +283,9 @@
     color: $gray-500;
     font-family: $font-cond;
     justify-self: center;
+    text-transform: uppercase;
+    font-size: 1.125rem;
+    text-align: center;
   }
 
   .date-end {
@@ -234,9 +294,8 @@
   }
 
   .date-start {
-    font-weight: 200;
-    font-size: 0.875rem;
-    line-height: 1.4;
+    font-weight: 100;
+    font-size: 1rem;
   }
 
   &__position {

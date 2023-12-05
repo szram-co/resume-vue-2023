@@ -1,18 +1,17 @@
 import './style.scss'
 
 import { createApp } from 'vue'
-import App from './App.vue'
-import installI18n from './lang'
+import { MotionPlugin } from '@vueuse/motion'
+
+import { i18n } from './lang'
 import { VueRecaptchaPlugin } from 'vue-recaptcha/head'
-import dayjs from 'dayjs'
+import App from './App.vue'
 
 // create and start the app
-const app = createApp(App, {
-  provide: () => {
-    return { $dayjs: dayjs }
-  }
-})
-installI18n(app)
+const app = createApp(App)
+
+app.use(MotionPlugin)
+app.use(i18n)
 app.use(VueRecaptchaPlugin, {
   v3SiteKey: '6LecXh8pAAAAAIn9FeYPNt0JCt9hRz4054CIxIeM'
 })
