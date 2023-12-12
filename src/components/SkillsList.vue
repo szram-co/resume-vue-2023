@@ -1,33 +1,46 @@
 <template>
-  <h3 class="resume-header">
-    {{ title }}
-  </h3>
-  <ul class="resume-skills">
-    <li v-for="(skillKey, n) in list" :key="n">
-      {{ $t(`${skillKey}`) }}
-    </li>
-  </ul>
+  <div class="resume-skills">
+    <h3
+      v-motion
+      :enter="{ x: 0, opacity: 1 }"
+      :initial="{ x: -50, opacity: 0 }"
+      class="resume-header"
+    >
+      {{ title }}
+    </h3>
+    <ul class="resume-list">
+      <template v-for="(skillKey, n) in skills" :key="skillKey">
+        <li
+          v-motion
+          :delay="100 + 50 * n"
+          :enter="{ x: 0, opacity: 1 }"
+          :initial="{ x: -50, opacity: 0 }"
+        >
+          {{ $t(`${skillKey}`) }}
+        </li>
+      </template>
+    </ul>
+  </div>
 </template>
 
-<script lang="ts">
-export default {
-  props: {
-    title: {
-      type: String
-    },
-    list: {
-      type: Array
-    }
+<script lang="ts" setup>
+const props = defineProps({
+  title: {
+    type: String,
+    required: true
+  },
+  skills: {
+    type: Array<string>,
+    required: true
   }
-}
+})
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
 @import '@/app.scss';
 
 .resume-header {
   font-size: 1.5rem;
-  font-family: $font-head;
   font-weight: 800;
   text-transform: uppercase;
   line-height: 3rem;
@@ -35,7 +48,7 @@ export default {
   margin-bottom: 1rem;
 }
 
-.resume-skills {
+.resume-list {
   display: block;
   padding: 0;
   margin: 0 0 3rem;

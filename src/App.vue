@@ -1,179 +1,266 @@
 <template>
-  <div v-if="$t" ref="parallaxTarget">
-    <TopHeader />
-    <div class="resume-container">
-      <section class="resume-profile" :style="parallaxStyle">
-        <div class="container">
-          <div
-            class="row"
-            v-motion
-            :initial="{
-              y: 100,
-              opacity: 0
-            }"
-            :enter="{
-              y: 0,
-              opacity: 1,
-              transition: {
-                type: 'spring',
-                stiffness: '100',
-                delay: 100
-              }
-            }"
-          >
-            <div class="col col-8 offset-4">
-              <h5 class="resume-boxed border border-3 d-inline-block border-dark mb-5">
-                {{ positionTitle }}
-              </h5>
+  <div v-if="$t" class="resume-container">
+    <TopHeader @beforeChangeLang="resumeReady = false" @changedLang="onLanguageChanged" />
+
+    <section class="resume-profile">
+      <div class="container">
+        <div class="row">
+          <div class="col col-lg-8 offset-lg-4 text-center text-lg-start">
+            <h5
+              v-motion
+              :delay="250"
+              :enter="{ opacity: 1, y: 0, scale: 1 }"
+              :initial="{ opacity: 0, y: -100, scale: 0.8 }"
+              class="resume-boxed d-inline-block mb-5"
+            >
+              {{ positionTitle }}
+            </h5>
+          </div>
+        </div>
+        <div class="row align-items-start">
+          <div class="col col-lg-4 pe-lg-5 order-lg-0 order-1">
+            <div class="row">
+              <div class="col col-12 col-sm-5 col-md-6 col-lg-12">
+                <div
+                  v-motion
+                  :delay="200"
+                  :enter="{ opacity: 1, y: 0, scale: 1 }"
+                  :initial="{ opacity: 0, y: -100, scale: 0.8 }"
+                  class="resume-picture"
+                >
+                  <img alt="" class="img-fluid d-block" src="./assets/patryk-szram-ai.png" />
+                </div>
+              </div>
+              <div class="col col-12 col-sm-7 col-md-6 col-lg-12">
+                <ul class="resume-contact">
+                  <template v-if="recaptchaStatus === RECAPTCHA_STATUS.DONE">
+                    <li
+                      v-motion
+                      :delay="200"
+                      :enter="{ opacity: 1, x: 0, scale: 1 }"
+                      :initial="{ opacity: 0, x: -100, scale: 0.8 }"
+                    >
+                      <a :href="`mailto:${contactEmail}`" class="link-lg">{{ contactEmail }}</a>
+                    </li>
+                    <li
+                      v-motion
+                      :delay="250"
+                      :enter="{ opacity: 1, x: 0, scale: 1 }"
+                      :initial="{ opacity: 0, x: -100, scale: 0.8 }"
+                    >
+                      <a :href="`tel:${contactPhone}`" class="link-lg">{{ contactPhone }}</a>
+                    </li>
+                    <li
+                      v-motion
+                      :delay="300"
+                      :enter="{ opacity: 1, x: 0, scale: 1 }"
+                      :initial="{ opacity: 0, x: -100, scale: 0.8 }"
+                      class="pt-4"
+                    >
+                      <a :href="`tel:${currentLocation}`">{{ currentLocation }}</a>
+                    </li>
+                  </template>
+                  <template v-else-if="recaptchaStatus === RECAPTCHA_STATUS.PENDING">
+                    <li>
+                      <div class="spinner-border" role="status">
+                        <span class="visually-hidden">Loading...</span>
+                      </div>
+                    </li>
+                  </template>
+                  <template v-else-if="recaptchaStatus === RECAPTCHA_STATUS.VERIFIED">
+                    <li
+                      v-motion
+                      :delay="200"
+                      :enter="{ opacity: 1, y: 0, scale: 1 }"
+                      :initial="{ opacity: 0, y: -100, scale: 0.75 }"
+                    >
+                      <div class="text-verified">
+                        <i class="bi bi-check-circle-fill text-success"></i><br />
+                        <div class="badge bg-success">Zweryfikowany odbiorca</div>
+                      </div>
+                    </li>
+                  </template>
+                </ul>
+
+                <div v-if="recaptchaStatus === RECAPTCHA_STATUS.DONE" class="resume-social">
+                  <a
+                    v-for="(link, key, n) in data.social"
+                    :key="key"
+                    v-motion
+                    :delay="350 + 50 * n"
+                    :enter="{ opacity: 1, y: 0, scale: 1, rotate: 0 }"
+                    :hovered="{ scale: 1.2, rotate: 5 }"
+                    :href="link.url"
+                    :initial="{ opacity: 0, y: 100, rotate: -90 }"
+                    :style="link.style"
+                    :target="link.target"
+                    :title="link.title"
+                  >
+                    <span :class="`bi ${link.icon} fs-2`"></span>
+                  </a>
+                </div>
+              </div>
             </div>
           </div>
-          <div class="row align-items-start">
-            <div class="col col-4 pe-5">
-              <div class="resume-picture" v-motion-slide-left>
-                <img alt="" class="img-fluid d-block" src="./assets/patryk-szram-ai.png" />
-              </div>
-
-              <ul class="resume-contact" v-motion-slide-left>
-                <template v-if="recaptchaVerified">
-                  <li>
-                    <a :href="`mailto:${contactEmail}`" class="link-lg">{{ contactEmail }}</a>
-                  </li>
-                  <li>
-                    <a :href="`tel:${contactPhone}`" class="link-lg">{{ contactPhone }}</a>
-                  </li>
-                  <li class="pt-4">
-                    <a :href="`tel:${currentLocation}`">{{ currentLocation }}</a>
-                  </li>
-                </template>
-                <template v-else>
-                  <li>
-                    <div class="spinner-border" role="status">
-                      <span class="visually-hidden">Loading...</span>
-                    </div>
-                  </li>
-                </template>
-              </ul>
-
-              <div class="resume-social" v-motion-slide-left>
-                <a
-                  :target="link.target"
-                  :href="link.url"
-                  v-for="(link, key) in data.social"
-                  :key="key"
-                  :title="link.title"
-                >
-                  <span :class="`bi ${link.icon} fs-2`"></span>
-                </a>
-              </div>
-            </div>
-            <div class="col col-8">
-              <h1
-                class="resume-hello fw-bold mb-5"
+          <div v-if="resumeReady" class="col col-lg-8 col-12 order-lg-1 order-0">
+            <h1
+              v-motion
+              :delay="100"
+              :enter="{ opacity: 1, x: 0 }"
+              :initial="{ opacity: 0, x: 100 }"
+              class="resume-hello mb-5"
+            >
+              {{ $t('welcome') }}
+              <br />
+              {{ $t('fullName') }}
+            </h1>
+            <div class="resume-description">
+              <p
+                v-for="(paragraph, index) in $tm('bio')"
+                :key="index"
                 v-motion
-                :initial="{
-                  scale: 0.8
-                }"
-                :enter="{
-                  scale: 1,
-                  transition: {
-                    delay: 100
-                  }
-                }"
+                :delay="150 + 50 * index"
+                :enter="{ opacity: 1, x: 0 }"
+                :initial="{ opacity: 0, x: 100 }"
+                class="mb-5"
               >
-                {{ $t('welcome') }}<br />{{ $t('fullName') }}.
-              </h1>
-              <div class="resume-description fs-5 fw-medium">
-                <p
-                  v-for="(paragraph, index) in $tm('bio')"
-                  :key="index"
-                  class="mb-5"
-                  v-motion-slide-right
-                >
-                  {{ paragraph }}
-                </p>
-              </div>
+                {{ paragraph }}
+              </p>
             </div>
           </div>
         </div>
-      </section>
-
-      <div class="container">
-        <div class="resume-line-x"></div>
       </div>
+    </section>
 
-      <section class="resume-experience">
-        <div class="container">
-          <div class="row align-items-start">
-            <div class="col col-4 pe-5 text-end">
-              <SkillsList :title="$t('header.skills')" :list="data.skillsKeys" />
-              <SkillsList :title="$t('header.technologies')" :list="data.technologyKeys" />
-              <SkillsList :title="$t('header.tools')" :list="data.toolsKeys" />
-            </div>
-            <div class="col col-8">
-              <h2 class="resume-soft">
-                {{ $t('header.experience') }}
-              </h2>
+    <div class="container">
+      <div
+        v-motion
+        :enter="{ opacity: 1, y: 0 }"
+        :initial="{ opacity: 0, y: -100 }"
+        class="resume-line-x"
+      ></div>
+    </div>
 
-              <div class="resume-timeline">
-                <template v-for="(company, c) in data.experience">
+    <section v-if="resumeReady" class="resume-experience">
+      <div class="container">
+        <div class="row align-items-start">
+          <div class="col col-lg-4 col-12 pe-lg-5 text-lg-end text-center order-lg-0 order-1">
+            <SkillsList :skills="data.skillsKeys" :title="$t('header.skills')" />
+            <SkillsList :skills="data.technologyKeys" :title="$t('header.technologies')" />
+            <SkillsList :skills="data.toolsKeys" :title="$t('header.tools')" />
+          </div>
+          <div class="col col-lg-8 col-12 order-lg-1 order-0">
+            <h2
+              v-motion
+              :enter="{ x: 0, opacity: 1 }"
+              :initial="{ x: 50, opacity: 0 }"
+              class="resume-soft"
+            >
+              {{ $t('header.experience') }}
+            </h2>
+
+            <div class="resume-timeline">
+              <template v-for="(company, c) in data.experience">
+                <div
+                  :style="{ '--dot-primary': company.companyColor }"
+                  class="resume-timeline__company"
+                >
+                  <div class="resume-timeline__logo">
+                    <img :src="company.companyLogo" alt="" />
+                  </div>
                   <div
-                    class="resume-timeline__company"
-                    :style="{ '--dot-primary': company.companyColor }"
+                    :class="{ 'resume-timeline__dot--first': c === 0 }"
+                    class="resume-timeline__dot"
                   >
-                    <div class="resume-timeline__logo">
-                      <img :src="company.companyLogo" alt="" />
+                    <i></i>
+                  </div>
+                  <div class="resume-timeline__name">
+                    <span
+                      v-motion
+                      :delay="150 + 200 * c"
+                      :enter="{ x: 0, opacity: 1 }"
+                      :initial="{ x: 100, opacity: 0 }"
+                    >
+                      {{ company.companyName }} {{ company.companyLocation }}
+                    </span>
+                    <em
+                      v-motion
+                      :delay="250 + 200 * c"
+                      :enter="{ x: 0, opacity: 1 }"
+                      :initial="{ x: 100, opacity: 0 }"
+                    >
+                      {{ company.companyDate }}
+                    </em>
+                  </div>
+
+                  <template v-for="(position, p) in company.positions">
+                    <div class="resume-timeline__date">
+                      <div
+                        v-motion
+                        :delay="350 + 100 * c + 200 * p"
+                        :enter="{ y: 0, opacity: 1 }"
+                        :initial="{ y: 50, opacity: 0 }"
+                        class="date-end"
+                      >
+                        {{ position.positionDate.end }}
+                      </div>
+                      <div
+                        v-motion
+                        :delay="400 + 100 * c + 200 * p"
+                        :enter="{ y: 0, opacity: 1 }"
+                        :initial="{ y: 50, opacity: 0 }"
+                        class="date-start"
+                      >
+                        {{ position.positionDate.start }}
+                      </div>
                     </div>
                     <div
+                      :style="{
+                        '--dot-secondary':
+                          p === company.positions?.length - 1 &&
+                          !!data.experience?.[c + 1]?.companyColor
+                            ? data.experience[c + 1].companyColor
+                            : company.companyColor
+                      }"
                       class="resume-timeline__dot"
-                      :class="{ 'resume-timeline__dot--first': c === 0 }"
                     >
                       <i></i>
                     </div>
-                    <div class="resume-timeline__name">
-                      {{ company.companyName }} {{ company.companyLocation }}
-                      <em>{{ company.companyDate }}</em>
-                    </div>
-
-                    <template v-for="(position, p) in company.positions">
-                      <div class="resume-timeline__date">
-                        <div class="date-end">{{ position.positionDate.end }}</div>
-                        <div class="date-start">{{ position.positionDate.start }}</div>
-                      </div>
-                      <div
-                        class="resume-timeline__dot"
-                        :style="{
-                          '--dot-secondary':
-                            c > 0 && !!company.positions?.[p + 1]
-                              ? company.companyColor
-                              : company.companyColor
-                        }"
+                    <div class="resume-timeline__position">
+                      <h4
+                        v-motion
+                        :delay="450 + 200 * c + 200 * p"
+                        :enter="{ x: 0, opacity: 1 }"
+                        :initial="{ x: 100, opacity: 0 }"
                       >
-                        <i></i>
-                      </div>
-                      <div class="resume-timeline__position">
-                        <h4>{{ position.positionName }}</h4>
-                        <p>{{ position.positionDesc }}</p>
-                      </div>
-                    </template>
-                  </div>
-                </template>
-              </div>
+                        {{ position.positionName }}
+                      </h4>
+                      <p
+                        v-motion
+                        :delay="550 + 200 * c + 200 * p"
+                        :enter="{ x: 0, opacity: 1 }"
+                        :initial="{ x: 100, opacity: 0 }"
+                      >
+                        {{ position.positionDesc }}
+                      </p>
+                    </div>
+                  </template>
+                </div>
+              </template>
             </div>
           </div>
         </div>
-      </section>
-    </div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script lang="ts" setup>
-import { useParallax } from '@vueuse/core'
-import { useChallengeV3, useRecaptchaProvider } from 'vue-recaptcha/head'
+import { useChallengeV3, useRecaptchaProvider } from 'vue-recaptcha'
 import TopHeader from './components/TopHeader.vue'
 import SkillsList from './components/SkillsList.vue'
 
-import type { CSSProperties } from 'vue'
-import { computed, onMounted, reactive, ref } from 'vue'
+import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
 import dayjs, { Dayjs } from 'dayjs'
 import duration from 'dayjs/plugin/duration'
@@ -183,20 +270,18 @@ import logoMoveCloser from '@/assets/logo-movecloser.png'
 
 const resumeReady = ref(false)
 
-const parallaxTarget = ref(null)
-const parallax = reactive(useParallax(parallaxTarget))
-
-const parallaxStyle = computed(
-  (): CSSProperties => ({
-    transform: `translateX(${-1 * parallax.tilt * 2}rem) translateY(${-1 * parallax.roll * 2}rem)`
-  })
-)
-
 dayjs.extend(duration)
 
 useRecaptchaProvider()
+
+enum RECAPTCHA_STATUS {
+  DONE,
+  PENDING,
+  VERIFIED
+}
+
 const recaptchaResponse = ref()
-const recaptchaVerified = computed(() => !!recaptchaResponse?.value)
+const recaptchaStatus = ref(RECAPTCHA_STATUS.PENDING)
 
 const { execute } = useChallengeV3('submit')
 
@@ -246,18 +331,21 @@ const data = reactive({
     github: {
       target: '_blank',
       icon: 'bi-github',
+      style: { '--social-color': '#24292e' },
       url: 'https://github.com/szram-co',
       title: 'github.com/szram-co'
     },
     linkedin: {
       target: '_blank',
       icon: 'bi-linkedin',
+      style: { '--social-color': '#0a66c2' },
       url: 'https://www.linkedin.com/in/patryk-szram/',
       title: 'linkedin.com/in/patryk-szram'
     },
     pdf: {
       target: '_self',
       icon: 'bi-download',
+      style: { '--social-color': 'var(--brand-secondary)' },
       url: resumePdf,
       title: 'linkedin.com/in/patryk-szram'
     }
@@ -338,9 +426,38 @@ const formatPhoneNumber = (phoneNumber: string): string => {
   return phoneNumber
 }
 
+const getRandColor = (brightness: number) => {
+  // Six levels of brightness from 0 to 5, 0 being the darkest
+  const rgbColor = [Math.random() * 256, Math.random() * 256, Math.random() * 256]
+  const mixColor = [brightness * 51, brightness * 51, brightness * 51] //51 => 255/5
+  const rgbMixed = [
+    rgbColor[0] + mixColor[0],
+    rgbColor[1] + mixColor[1],
+    rgbColor[2] + mixColor[2]
+  ].map(function (x) {
+    return Math.round(x / 2.0)
+  })
+
+  return 'rgb(' + rgbMixed.join(',') + ')'
+}
+
+const onLanguageChanged = () => {
+  document.documentElement.style.setProperty('--brand-primary', getRandColor(3))
+  // document.documentElement.style.setProperty('--brand-secondary', getRandColor(0))
+
+  resumeReady.value = true
+}
+
 onMounted(async () => {
   contactPhone.value = formatPhoneNumber(contactPhone.value)
+  await nextTick(() => {
+    resumeReady.value = true
+  })
   recaptchaResponse.value = await execute()
-  resumeReady.value = true
+  recaptchaStatus.value = RECAPTCHA_STATUS.VERIFIED
+
+  setTimeout(async () => {
+    recaptchaStatus.value = RECAPTCHA_STATUS.DONE
+  }, 2000)
 })
 </script>

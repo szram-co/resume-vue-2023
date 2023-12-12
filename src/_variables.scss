@@ -1,18 +1,14 @@
 // Default font family
-$font-base: proxima-nova, sans-serif;
-
-// Thin font
-$font-cond: roboto-condensed, sans-serif;
+$font-base:
+  GT Walsheim,
+  sans-serif;
 
 // Massive font weight
 $font-head: stolzl, sans-serif;
 
 // Serif font style
-$font-display: proxima-sera, serif;
+$font-serif: proxima-sera, serif;
 
 $color-cyan-1: #1b5d7f;
 $color-cyan-2: #3e8599;
 $color-cyan-3: #78c7c1;
-
-$gradient-cyan: linear-gradient(to left, $color-cyan-1 0%, $color-cyan-2 50%, $color-cyan-3 100%);
-$gradient-cyan-bright: linear-gradient(to left, $color-cyan-3 75%, $color-cyan-2);
