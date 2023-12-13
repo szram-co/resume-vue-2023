@@ -1,6 +1,6 @@
 <template>
   <div v-if="$t" class="resume-container">
-    <TopHeader @beforeChangeLang="resumeReady = false" @changedLang="onLanguageChanged" />
+    <TopHeader @beforeChange="resumeReady = false" @changed="onThemeChanged" />
 
     <section class="resume-profile">
       <div class="container">
@@ -76,7 +76,7 @@
                     >
                       <div class="text-verified">
                         <i class="bi bi-check-circle-fill text-success"></i><br />
-                        <div class="badge bg-success">Zweryfikowany odbiorca</div>
+                        <div class="text-success">Zweryfikowany odbiorca</div>
                       </div>
                     </li>
                   </template>
@@ -186,7 +186,7 @@
                     <em
                       v-motion
                       :delay="250 + 200 * c"
-                      :enter="{ x: 0, opacity: 1 }"
+                      :enter="{ x: 0, opacity: 0.75 }"
                       :initial="{ x: 100, opacity: 0 }"
                     >
                       {{ company.companyDate }}
@@ -198,17 +198,18 @@
                       <div
                         v-motion
                         :delay="350 + 100 * c + 200 * p"
-                        :enter="{ y: 0, opacity: 1 }"
-                        :initial="{ y: 50, opacity: 0 }"
+                        :class="{ 'date-current': position.positionDate?.current }"
+                        :enter="{ x: 0, opacity: position.positionDate?.current ? 1 : 0.75 }"
                         class="date-end"
+                        :initial="{ x: -50, opacity: 0 }"
                       >
                         {{ position.positionDate.end }}
                       </div>
                       <div
                         v-motion
                         :delay="400 + 100 * c + 200 * p"
-                        :enter="{ y: 0, opacity: 1 }"
-                        :initial="{ y: 50, opacity: 0 }"
+                        :enter="{ x: 0, opacity: 0.75 }"
+                        :initial="{ x: -50, opacity: 0 }"
                         class="date-start"
                       >
                         {{ position.positionDate.start }}
@@ -362,6 +363,7 @@ const data = reactive({
           positionName: 'Senior Frontend Developer',
           positionDesc: computed(() => t('jobs.raiffeisen.senior')),
           positionDate: {
+            current: true, // TODO: pls change that
             end: computed(() => `${t('dates.present')}`),
             start: computed(() => `${t('months.jun').slice(0, 3)} 2021`)
           }
@@ -441,10 +443,16 @@ const getRandColor = (brightness: number) => {
   return 'rgb(' + rgbMixed.join(',') + ')'
 }
 
-const onLanguageChanged = () => {
-  document.documentElement.style.setProperty('--brand-primary', getRandColor(3))
-  // document.documentElement.style.setProperty('--brand-secondary', getRandColor(0))
+const languageToggled = ref(false)
 
+const onThemeChanged = () => {
+  if (languageToggled.value) {
+    document.documentElement.style.removeProperty('--brand-primary')
+  } else {
+    document.documentElement.style.setProperty('--brand-primary', getRandColor(3))
+  }
+
+  languageToggled.value = !languageToggled.value
   resumeReady.value = true
 }
 

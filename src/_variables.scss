@@ -1,13 +1,14 @@
 // Default font family
-$font-base:
-  GT Walsheim,
-  sans-serif;
+$font-base: 'GT Walsheim Pro', sans-serif;
+
+// Slim font weight
+$font-condensed: 'GT Walsheim Pro Condensed', sans-serif;
 
 // Massive font weight
-$font-head: stolzl, sans-serif;
+$font-head: 'stolzl', sans-serif;
 
 // Serif font style
-$font-serif: proxima-sera, serif;
+$font-serif: 'proxima-sera', serif;
 
 $color-cyan-1: #1b5d7f;
 $color-cyan-2: #3e8599;

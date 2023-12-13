@@ -1,29 +1,40 @@
 <template>
   <nav class="navbar navbar-expand fixed-top bg-body-gradient">
-    <div class="container">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <button
-            aria-expanded="false"
-            class="btn btn-outline-light btn-sm dropdown-toggle"
-            data-bs-toggle="dropdown"
-            type="button"
-          >
-            <i class="bi bi-globe2"></i>
-            {{ locale.toString().toLocaleUpperCase() }}
-          </button>
-          <ul class="dropdown-menu">
-            <li v-for="(lang, key) in $i18n.availableLocales" :key="key">
-              <button
-                :class="{ active: lang === $i18n.locale }"
-                class="dropdown-item"
-                type="button"
-                @click.prevent="changeLanguage(lang)"
-              >
+    <div class="container justify-content-between">
+      <strong class="navbar-text"> WIP <sup class="badge bg-dark fw-normal">90%</sup> </strong>
+      <ul class="navbar-nav align-items-center">
+        <template v-for="(lang, key) in $i18n.availableLocales" :key="key">
+          <li v-if="lang !== $i18n.locale" class="nav-item">
+            <button
+              v-motion
+              :enter="{ scale: 1, y: 0, opacity: 1 }"
+              :initial="{ scale: 0.5, y: 20 * (languageToggled ? -1 : 1), opacity: 0 }"
+              class="btn btn-link nav-link text-light text-decoration-none"
+              role="button"
+              @click.prevent="changeLanguage(lang)"
+            >
+              <span class="letter-spacing">
                 {{ lang.toString().toLocaleUpperCase() }}
-              </button>
-            </li>
-          </ul>
+              </span>
+            </button>
+          </li>
+        </template>
+        <li class="nav-item align-self-center">
+          <div class="vr h-50 mx-2"></div>
+        </li>
+        <li class="nav-item">
+          <button
+            v-if="themeReady"
+            v-motion
+            :enter="{ y: 0, opacity: 1 }"
+            :initial="{ y: 20 * (themeColorMode === ThemeColorMode.dark ? -1 : 1), opacity: 0 }"
+            class="btn btn-link nav-link text-light text-decoration-none"
+            role="button"
+            @click="toggleThemeColor"
+          >
+            <i v-if="themeColorMode === ThemeColorMode.dark" class="bi bi-sun-fill"></i>
+            <i v-if="themeColorMode === ThemeColorMode.light" class="bi bi-moon-stars-fill"></i>
+          </button>
         </li>
       </ul>
     </div>
@@ -32,13 +43,22 @@
 
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
-import { nextTick, onMounted } from 'vue'
+import { nextTick, onMounted, ref } from 'vue'
+import { ThemeColorMode, ThemeService } from '@/services/Theme.service'
+import { FactoryService } from '@/services/Factory.service'
 
-const defaultLanguage = window?.navigator?.language?.includes('pl') ? 'pl' : 'en'
-const selectedLanguage = localStorage.getItem('selectedLanguage')
-const { locale } = useI18n({ useScope: 'global' })
+const themeReady = ref(false)
+const themeService = FactoryService.useService(ThemeService)
+const themeColorMode = ref(themeService.getColorMode())
 
-const emit = defineEmits(['beforeChangeLang', 'changedLang'])
+const LocalStoreKey: string = 'szramLanguage'
+const getStoredLanguage = localStorage.getItem(LocalStoreKey)
+const getPreferredLanguage = window?.navigator?.language?.includes('pl') ? 'pl' : 'en'
+const { locale: language } = useI18n({ useScope: 'global' })
+
+const emit = defineEmits(['beforeChange', 'changed'])
+
+const languageToggled = ref(false)
 
 const changeLanguage = (lang: string) => {
   switch (lang) {
@@ -46,16 +66,35 @@ const changeLanguage = (lang: string) => {
     case 'pl':
       break
   }
-  emit('beforeChangeLang')
-  localStorage.setItem('selectedLanguage', lang)
-  locale.value = lang
+  emit('beforeChange')
+  localStorage.setItem(LocalStoreKey, lang)
+  language.value = lang
   nextTick(() => {
-    emit('changedLang')
+    emit('changed')
+  })
+
+  languageToggled.value = !languageToggled.value
+}
+
+const toggleThemeColor = () => {
+  themeReady.value = false
+  themeService.toggleColorMode()
+
+  nextTick(() => {
+    themeColorMode.value = themeService.getColorMode()
+    themeReady.value = true
   })
 }
 
 onMounted(() => {
-  locale.value = selectedLanguage || defaultLanguage
+  language.value = getStoredLanguage || getPreferredLanguage
+
+  themeService.setup()
+
+  nextTick(() => {
+    themeColorMode.value = themeService.getColorMode()
+    themeReady.value = true
+  })
 })
 </script>
 
