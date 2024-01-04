@@ -2,6 +2,8 @@
   "showContactDetails": "Show contact info",
   "fullName": "Patryk Szram",
   "welcome": "Hello, I’m",
+  "protected": "Spam protection active",
+  "protecting": "Guarding against spam...",
   "bio": [
     "I have over a decade of experience in the field of web development. I focus on designing and developing responsive web applications tailored to the business needs of clients. My expertise includes application architecture, developing application structures, choosing optimal technologies, and implementing solutions to ensure the productivity and performance of applications. I design strategies to streamline processes related to the deployment and development of applications. Additionally, I possess skills in designing graphics for publication and web design based on knowledge of the latest UX/UI trends.",
     "As a Fullstack Web Developer with proficiency in JS/TS, SASS/LESS, PHP/SQL, I have versatile experience in the web development and e-commerce sectors. I am a dedicated, fast-learning self-learner. I understand best programming practices, prioritize business goals, and meet client project requirements. I am always open to new challenges. I love soccer and am a proud father of two wonderful children."
@@ -42,7 +44,8 @@
   },
   "city": {
     "gdz": "Grudziadz",
-    "inWaw": "in Warsaw"
+    "inWaw": "in Warsaw",
+    "inGda": "w Gdansk"
   },
   "country": {
     "pl": "Poland"
@@ -57,14 +60,19 @@
     },
     "movecloser": {
       "fullstack": "I was responsible for overseeing project teams, with a primary focus on ensuring high-quality code delivery and efficient collaboration. As a team coordinator, I ensured coherence in technology selection and the effectiveness of team activities. I actively organized training sessions aimed at standardizing developers' approaches, eliminating errors, and enhancing the team's skills. My duties included comprehensive coordination throughout project implementation, from preparing the team environment to production deployment."
+    },
+    "coderabbit": {
+      "fullstack": "In my role as a Fullstack Developer in self-employment, I was responsible for the entire organizational process of projects. This encompassed designing architecture, implementation, deployment, and direct communication with clients. My responsibilities covered both technical and relational aspects, ensuring comprehensive project support. I prioritized efficiency, high-quality code, and client satisfaction through close collaboration and transparency in the project implementation process.",
+      "selfEmployed": "Self-employed"
+    },
+    "flash-media": {
+      "developer": "I had the opportunity to design, create, and maintain numerous web projects. My skills encompassed PHP, HTML, CSS, and JavaScript, and my work demonstrated professionalism and a commitment to quality in every project. Collaborating with graphic tools such as Photoshop and Illustrator, I developed eye-catching and practical solutions. Working at Flash-Media was a significant milestone in my career as a web developer, as it allowed me to gain valuable experience in designing and building various web projects while enhancing my programming and user interface design skills."
     }
   },
   "dates": {
     "present": "Present",
-    "years": "years",
-    "year": "year",
-    "months": "months",
-    "month": "month"
+    "year": "year|years",
+    "month": "month|months"
   },
   "months": {
     "jan": "January",

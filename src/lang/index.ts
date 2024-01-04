@@ -24,5 +24,17 @@ export const i18n = createI18n({
   legacy: false,
   globalInjection: true,
   locale: getLocale(),
-  messages
+  messages,
+  pluralRules: {
+    pl: (choice) => {
+      if (choice === 1) {
+        return 0
+      }
+      if (choice > 1 && choice < 5) {
+        return 1
+      }
+
+      return 2
+    }
+  }
 })

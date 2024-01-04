@@ -2,6 +2,8 @@
   "showContactDetails": "Pokaż dane kontaktowe",
   "fullName": "Patryk Szram",
   "welcome": "Witaj, jestem",
+  "protected": "Ochrona przed spamem aktywna",
+  "protecting": "Zabezpieczam przed spamem...",
   "bio": [
     "Mam ponad dekadę doświadczenia w obszarze web developmentu. Koncentruję się na projektowaniu i rozwijaniu responsywnych aplikacji internetowych, dostosowywanych do potrzeb biznesowych klienta. Zajmuję się architekturą środowisk aplikacji, opracowywaniem struktury aplikacji, wyborem optymalnych technologii oraz rozwiązaniami pozwalającymi zadbać o produktywność rozwoju i wydajność aplikacji. Projektuję strategie usprawniające procesy związane z wdrażaniem i rozwojem aplikacji. Dodatkowo, posiadam umiejętności w zakresie projektowania grafiki przeznaczonej do publikacji oraz web designu opartego na znajomości najnowszych trendów UX/UI.",
     "Jako Fullstack Web Developer ze znajomością JS/TS, SASS/LESS, PHP/SQL posiadam wszechstronne doświadczenie w sektorze web developmentu i e-commerce. Jestem zaangażowanym, szybko uczącym się samoukiem. Rozumiem dobre praktyki programowania, stawiane przede mną cele biznesowe oraz wymagania projektowe klientów. Zawsze pozostaję otwarty na nowe wyzwania. Kocham piłkę nożną i jestem dumnym ojcem dwójki wspaniałych dzieci."
@@ -42,7 +44,8 @@
   },
   "city": {
     "gdz": "Grudziądz",
-    "inWaw": "w Warszawie"
+    "inWaw": "w Warszawie",
+    "inGda": "w Gdańsku"
   },
   "country": {
     "pl": "Polska"
@@ -57,14 +60,19 @@
     },
     "movecloser": {
       "fullstack": "Odpowiadałem za prace zespołów projektowych, priorytetem było zapewnienie wysokiej jakości dostarczanego kodu oraz efektywnej współpracy. Pełniąc funkcję koordynatora zespołu, dbałem o spójność w doborze technologii oraz efektywność działań. Aktywnie organizowałem szkolenia, mające na celu standaryzację podejścia developerów, eliminację błędów oraz rozwój umiejętności zespołu. Moje obowiązki obejmowały kompleksową koordynację przy realizacji projektów, począwszy od przygotowania środowiska dla zespołu, aż do deploymentu produkcyjnego."
+    },
+    "coderabbit": {
+      "fullstack": "W roli Fullstack Developera na własnej działalności gospodarczej odpowiadałem za całość procesu organizacyjnego projektów. Zajmowałem się projektowaniem architektury, realizacją oraz deploymentem, a także bezpośrednią komunikacją z klientami. Moje zadania obejmowały zarówno aspekty techniczne, jak i relacyjne, zapewniając kompleksową obsługę projektów. Dbałem o efektywność działań, wysoką jakość kodu oraz satysfakcję klientów poprzez ścisłą współpracę i transparentność w procesie realizacji projektów.",
+      "selfEmployed": "samozatrudnienie"
+    },
+    "flash-media": {
+      "developer": "Miałem okazję projektować, tworzyć i utrzymywać wiele projektów internetowych. Moje umiejętności obejmowały PHP, HTML, CSS i JavaScript, a moje działania wykazały profesjonalizm i dbałość o jakość w każdym projekcie. Współpracując z narzędziami graficznymi, takimi jak Photoshop i Illustrator, opracowałem przyciągające uwagę i praktyczne rozwiązania. Praca w Flash-Media była ważnym etapem mojej kariery jako web developera, ponieważ umożliwiła mi zdobycie cennego doświadczenia w projektowaniu i tworzeniu różnych projektów internetowych oraz rozwijanie moich umiejętności w programowaniu i projektowaniu interfejsów użytkownika."
     }
   },
   "dates": {
     "present": "Obecnie",
-    "years": "lata",
-    "year": "rok",
-    "months": "miesięcy",
-    "month": "miesiąc"
+    "year": "rok|lata|lat",
+    "month": "miesiąc|miesiące|miesięcy"
   },
   "months": {
     "jan": "Styczeń",

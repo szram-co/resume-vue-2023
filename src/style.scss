@@ -75,6 +75,22 @@
   }
 }
 
+@page {
+  size: A4;
+  margin: 0;
+}
+
+@media print {
+  html {
+    font-size: 10px;
+  }
+  html,
+  body {
+    width: 210mm;
+    height: 297mm;
+  }
+}
+
 body {
   font-smooth: always;
   -webkit-font-smoothing: antialiased;
@@ -112,6 +128,10 @@ body {
   padding: 5rem 0;
   margin: 0 auto;
   transition: 0.2s all ease;
+
+  @media print {
+    padding: 1rem 0;
+  }
 }
 
 .resume-line-x {
@@ -235,7 +255,7 @@ body {
 }
 
 .text-verified {
-  @include font-size(12px);
+  @include font-size(1rem);
   text-align: center;
   line-height: 1.2;
 }
@@ -287,7 +307,7 @@ body {
   @include font-size(3rem);
   font-weight: bold;
   line-height: 3rem;
-  margin-block-start: 0.5rem;
+  margin-block-start: 1rem;
   margin-block-end: 2.5rem;
 }
 
@@ -457,7 +477,7 @@ body {
     text-transform: uppercase;
     text-align: center;
     letter-spacing: 0.025rem;
-    color: var(--dot-primary);
+    color: var(--company-color);
 
     [data-bs-theme='light'] & {
       filter: brightness(85%) contrast(125%);
@@ -475,7 +495,7 @@ body {
 
   .date-current {
     color: var(--bs-body-color);
-    font-weight: 800;
+    font-weight: 600;
     @include font-size(1.125rem);
   }
 
@@ -489,4 +509,8 @@ body {
       @include font-size(1.125rem);
     }
   }
+}
+
+.nav-item--lang {
+  width: 2.2rem;
 }

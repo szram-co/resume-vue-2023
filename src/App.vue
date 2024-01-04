@@ -1,6 +1,6 @@
 <template>
   <div v-if="$t" class="resume-container">
-    <TopHeader @beforeChange="resumeReady = false" @changed="onThemeChanged" />
+    <TopHeader :links="data.social" @beforeChange="resumeReady = false" @changed="onThemeChanged" />
 
     <section class="resume-profile">
       <div class="container">
@@ -62,21 +62,56 @@
                   </template>
                   <template v-else-if="recaptchaStatus === RECAPTCHA_STATUS.PENDING">
                     <li>
-                      <div class="spinner-border" role="status">
-                        <span class="visually-hidden">Loading...</span>
+                      <div class="text-verified">
+                        <h5 class="d-flex align-items-center justify-content-center gap-2">
+                          <span class="d-inline-block">Captcha</span>
+                          <span class="d-inline-block text-muted" style="width: 24px; height: 24px">
+                            <span
+                              class="spinner-border"
+                              style="--bs-spinner-width: 24px; --bs-spinner-height: 24px"
+                            ></span>
+                          </span>
+                          <span class="d-inline-block">Checking</span>
+                        </h5>
+                        <div
+                          v-motion
+                          :delay="200"
+                          :enter="{ opacity: 1, y: 0 }"
+                          :initial="{ opacity: 0, y: 100 }"
+                          class="text-muted"
+                        >
+                          {{ $t('protecting') }}
+                        </div>
                       </div>
                     </li>
                   </template>
                   <template v-else-if="recaptchaStatus === RECAPTCHA_STATUS.VERIFIED">
-                    <li
-                      v-motion
-                      :delay="200"
-                      :enter="{ opacity: 1, y: 0, scale: 1 }"
-                      :initial="{ opacity: 0, y: -100, scale: 0.75 }"
-                    >
+                    <li>
                       <div class="text-verified">
-                        <i class="bi bi-check-circle-fill text-success"></i><br />
-                        <div class="text-success">Zweryfikowany odbiorca</div>
+                        <h5 class="d-flex align-items-center justify-content-center gap-2">
+                          <span class="d-inline-block">Captcha</span>
+                          <span
+                            class="d-inline-block text-success"
+                            style="width: 24px; height: 24px"
+                            ><i
+                              v-motion
+                              :delay="100"
+                              :enter="{ opacity: 1, y: 0 }"
+                              :initial="{ opacity: 0, y: -100 }"
+                              class="bi bi-shield-fill-check"
+                            ></i
+                          ></span>
+                          <span class="d-inline-block text-success">Protected</span>
+                        </h5>
+                        <div
+                          v-motion
+                          :delay="100"
+                          :enter="{ opacity: 1, y: 0 }"
+                          :initial="{ opacity: 0, y: 100 }"
+                          class="text-success-emphasis"
+                        >
+                          {{ $t('protected') }}
+                        </div>
                       </div>
                     </li>
                   </template>
@@ -102,7 +137,7 @@
               </div>
             </div>
           </div>
-          <div v-if="resumeReady" class="col col-lg-8 col-12 order-lg-1 order-0">
+          <div v-if="resumeReady" class="col col-lg-8 col-12 order-lg-1 order-0 d-print-table-cell">
             <h1
               v-motion
               :delay="100"
@@ -162,7 +197,10 @@
             <div class="resume-timeline">
               <template v-for="(company, c) in data.experience">
                 <div
-                  :style="{ '--dot-primary': company.companyColor }"
+                  :style="{
+                    '--dot-primary': company.companyColor,
+                    '--company-color': company.companyColorText
+                  }"
                   class="resume-timeline__company"
                 >
                   <div class="resume-timeline__logo">
@@ -198,8 +236,8 @@
                       <div
                         v-motion
                         :delay="350 + 100 * c + 200 * p"
-                        :class="{ 'date-current': position.positionDate?.current }"
-                        :enter="{ x: 0, opacity: position.positionDate?.current ? 1 : 0.75 }"
+                        :class="{ 'date-current': !!position.positionDate.current }"
+                        :enter="{ x: 0, opacity: position.positionDate.current ? 1 : 0.75 }"
                         class="date-end"
                         :initial="{ x: -50, opacity: 0 }"
                       >
@@ -263,11 +301,13 @@ import SkillsList from './components/SkillsList.vue'
 
 import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
-import dayjs, { Dayjs } from 'dayjs'
+import dayjs from 'dayjs'
 import duration from 'dayjs/plugin/duration'
 import logoRaiffeisen from '@/assets/logo-raiffeisen.png'
 import logoStabilis from '@/assets/logo-stabilis.png'
 import logoMoveCloser from '@/assets/logo-movecloser.png'
+import logoCodeRabbit from '@/assets/logo-coderabbit.png'
+import logoFlashMedia from '@/assets/logo-flash-media.png'
 
 const resumeReady = ref(false)
 
@@ -294,14 +334,30 @@ const resumePdf = computed(() => `/patryk-szram-resume-${locale.value}.pdf`)
 const { t, locale } = useI18n({ useScope: 'global' })
 const currentLocation = `${t('city.gdz')}, ${t('country.pl')}`
 
-const companyTimePeriod = (start: Dayjs, end: Dayjs) => {
-  const dateStart = start.hour(12)
-  const dateEnd = end.hour(12)
-  const dateDiff = dayjs.duration(dateStart.diff(dateEnd))
-  const textYear = dateDiff.years() <= 1 ? t('dates.year') : t('dates.years')
-  const textMonth = dateDiff.months() <= 1 ? t('dates.month') : t('dates.months')
+function calculatePeriod(start: string, end: string) {
+  const startDate = dayjs(start)
+  const endDate = dayjs(end)
 
-  return `${dateDiff.years()} ${textYear}, ${dateDiff.months()} ${textMonth}`
+  if (startDate.isAfter(endDate)) {
+    console.error('StartDate should be earlier than EndDate')
+    return
+  }
+
+  const totalMonths = (endDate.year() - startDate.year()) * 12 + endDate.month() - startDate.month()
+  const finalYears = Math.floor(totalMonths / 12)
+  const finalMonths = totalMonths % 12
+
+  const finalChunks: string[] = []
+
+  if (finalYears > 0) {
+    finalChunks.push(`${finalYears} ${t('dates.year', finalYears)}`)
+  }
+
+  if (finalMonths > 0) {
+    finalChunks.push(`${finalMonths} ${t('dates.month', finalMonths)}`)
+  }
+
+  return finalChunks.join(', ')
 }
 
 const data = reactive({
@@ -356,8 +412,9 @@ const data = reactive({
       companyName: 'Raiffeisen Bank International AG',
       companyLogo: logoRaiffeisen,
       companyColor: '#fee600',
+      companyColorText: '#d4c107',
       companyLocation: computed(() => `${t('city.inWaw')}, ${t('country.pl')}`),
-      companyDate: computed(() => companyTimePeriod(dayjs(), dayjs('2020-05'))),
+      companyDate: computed(() => calculatePeriod('2020-05', '2023-12')),
       positions: [
         {
           positionName: 'Senior Frontend Developer',
@@ -372,6 +429,7 @@ const data = reactive({
           positionName: 'Frontend Developer',
           positionDesc: computed(() => t('jobs.raiffeisen.mid')),
           positionDate: {
+            current: false,
             end: computed(() => `${t('months.jun').slice(0, 3)} 2021`),
             start: computed(() => `${t('months.may').slice(0, 3)} 2020`)
           }
@@ -382,14 +440,16 @@ const data = reactive({
       companyName: 'STABILIS.IO®',
       companyLogo: logoStabilis,
       companyColor: '#76f2f9',
+      companyColorText: '#5dd4db',
       companyLocation: computed(() => `${t('city.inWaw')}, ${t('country.pl')}`),
-      companyDate: computed(() => companyTimePeriod(dayjs('2020-05'), dayjs('2018-11'))),
+      companyDate: computed(() => calculatePeriod('2018-11', '2020-05')),
 
       positions: [
         {
           positionName: 'Lead Frontend Developer',
           positionDesc: computed(() => t('jobs.stabilis.lead')),
           positionDate: {
+            current: false,
             end: computed(() => `${t('months.may').slice(0, 3)} 2020`),
             start: computed(() => `${t('months.nov').slice(0, 3)} 2018`)
           }
@@ -400,15 +460,55 @@ const data = reactive({
       companyName: 'Move Closer',
       companyLogo: logoMoveCloser,
       companyColor: '#1a2bd9',
+      companyColorText: '#363e96',
       companyLocation: computed(() => `${t('city.inWaw')}, ${t('country.pl')}`),
-      companyDate: computed(() => companyTimePeriod(dayjs('2018-11'), dayjs('2017-03'))),
+      companyDate: computed(() => calculatePeriod('2017-03', '2018-11')),
       positions: [
         {
           positionName: 'Senior Fullstack Developer',
           positionDesc: computed(() => t('jobs.movecloser.fullstack')),
           positionDate: {
+            current: false,
             end: computed(() => `${t('months.nov').slice(0, 3)} 2018`),
             start: computed(() => `${t('months.mar').slice(0, 3)} 2017`)
+          }
+        }
+      ]
+    },
+    {
+      companyName: 'Coderabbit',
+      companyLogo: logoCodeRabbit,
+      companyColor: '#d5dc2b',
+      companyColorText: '#5e7555',
+      companyLocation: computed(() => `${t('city.inWaw')}, ${t('country.pl')}`),
+      companyDate: computed(() => calculatePeriod('2015-11', '2017-03')),
+      positions: [
+        {
+          positionName: `Fullstack Developer`,
+          positionDesc: computed(() => t('jobs.coderabbit.fullstack')),
+          positionDate: {
+            current: false,
+            end: computed(() => `${t('months.nov').slice(0, 3)} 2017`),
+            start: computed(() => `${t('months.mar').slice(0, 3)} 2015`)
+          }
+        }
+      ]
+    },
+    {
+      companyName: 'Flash-Media',
+      companyLogo: logoFlashMedia,
+      companyColor: '#ffd200',
+      companyColorText: '#222',
+      companyLocation: computed(() => `${t('city.inGda')}, ${t('country.pl')}`),
+      companyDate: computed(() => calculatePeriod('2011-11', '2015-11')),
+      positions: [
+        {
+          positionName: `Web Developer`,
+          positionDesc: computed(() => t('jobs.flash-media.developer')),
+          positionDate: {
+            current: false,
+            end: computed(() => `${t('months.nov').slice(0, 3)} 2017`),
+            start: computed(() => `${t('months.mar').slice(0, 3)} 2015`)
           }
         }
       ]
@@ -428,30 +528,11 @@ const formatPhoneNumber = (phoneNumber: string): string => {
   return phoneNumber
 }
 
-const getRandColor = (brightness: number) => {
-  // Six levels of brightness from 0 to 5, 0 being the darkest
-  const rgbColor = [Math.random() * 256, Math.random() * 256, Math.random() * 256]
-  const mixColor = [brightness * 51, brightness * 51, brightness * 51] //51 => 255/5
-  const rgbMixed = [
-    rgbColor[0] + mixColor[0],
-    rgbColor[1] + mixColor[1],
-    rgbColor[2] + mixColor[2]
-  ].map(function (x) {
-    return Math.round(x / 2.0)
-  })
-
-  return 'rgb(' + rgbMixed.join(',') + ')'
-}
+const sleep = (m: number) => new Promise((r) => setTimeout(r, m))
 
 const languageToggled = ref(false)
 
 const onThemeChanged = () => {
-  if (languageToggled.value) {
-    document.documentElement.style.removeProperty('--brand-primary')
-  } else {
-    document.documentElement.style.setProperty('--brand-primary', getRandColor(3))
-  }
-
   languageToggled.value = !languageToggled.value
   resumeReady.value = true
 }
@@ -461,11 +542,21 @@ onMounted(async () => {
   await nextTick(() => {
     resumeReady.value = true
   })
+
   recaptchaResponse.value = await execute()
+
+  await sleep(500)
   recaptchaStatus.value = RECAPTCHA_STATUS.VERIFIED
 
-  setTimeout(async () => {
-    recaptchaStatus.value = RECAPTCHA_STATUS.DONE
-  }, 2000)
+  await sleep(500)
+  recaptchaStatus.value = RECAPTCHA_STATUS.DONE
 })
 </script>
+
+<style lang="scss">
+@media print {
+  .grecaptcha-badge {
+    visibility: hidden;
+  }
+}
+</style>

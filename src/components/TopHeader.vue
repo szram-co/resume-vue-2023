@@ -1,10 +1,43 @@
 <template>
   <nav class="navbar navbar-expand fixed-top bg-body-gradient">
-    <div class="container justify-content-between">
-      <strong class="navbar-text"> WIP <sup class="badge bg-dark fw-normal">90%</sup> </strong>
+    <div class="container">
+      <a class="navbar-brand mb-0 h1 text-light me-auto" href="/">szram.co</a>
       <ul class="navbar-nav align-items-center">
+        <li
+          v-for="(link, key, n) in prop.links"
+          :key="key"
+          v-motion
+          :delay="350 + 50 * n"
+          :enter="{ opacity: 1, y: 0, scale: 1, rotate: 0 }"
+          :initial="{ opacity: 0, y: 100, rotate: -90 }"
+          :style="link.style"
+          class="nav-item"
+        >
+          <a
+            :hovered="{ scale: 1.2, rotate: 5 }"
+            :href="link.url"
+            :target="link.target"
+            :title="link.title"
+            class="btn btn-link nav-link text-light"
+          >
+            <span :class="`bi ${link.icon}`"></span>
+          </a>
+        </li>
+        <li class="nav-item d-block">
+          <div class="vr h-100 d-block mx-2"></div>
+        </li>
+        <li class="nav-item">
+          <button
+            class="btn btn-link nav-link text-light text-decoration-none"
+            role="button"
+            @click="toggleDark()"
+          >
+            <i v-if="isDark" class="bi bi-sun-fill"></i>
+            <i v-if="!isDark" class="bi bi-moon-stars-fill"></i>
+          </button>
+        </li>
         <template v-for="(lang, key) in $i18n.availableLocales" :key="key">
-          <li v-if="lang !== $i18n.locale" class="nav-item">
+          <li v-if="lang !== $i18n.locale" class="nav-item nav-item--lang">
             <button
               v-motion
               :enter="{ scale: 1, y: 0, opacity: 1 }"
@@ -19,23 +52,6 @@
             </button>
           </li>
         </template>
-        <li class="nav-item align-self-center">
-          <div class="vr h-50 mx-2"></div>
-        </li>
-        <li class="nav-item">
-          <button
-            v-if="themeReady"
-            v-motion
-            :enter="{ y: 0, opacity: 1 }"
-            :initial="{ y: 20 * (themeColorMode === ThemeColorMode.dark ? -1 : 1), opacity: 0 }"
-            class="btn btn-link nav-link text-light text-decoration-none"
-            role="button"
-            @click="toggleThemeColor"
-          >
-            <i v-if="themeColorMode === ThemeColorMode.dark" class="bi bi-sun-fill"></i>
-            <i v-if="themeColorMode === ThemeColorMode.light" class="bi bi-moon-stars-fill"></i>
-          </button>
-        </li>
       </ul>
     </div>
   </nav>
@@ -44,12 +60,17 @@
 <script lang="ts" setup>
 import { useI18n } from 'vue-i18n'
 import { nextTick, onMounted, ref } from 'vue'
-import { ThemeColorMode, ThemeService } from '@/services/Theme.service'
-import { FactoryService } from '@/services/Factory.service'
+import { useDark, useToggle } from '@vueuse/core'
 
 const themeReady = ref(false)
-const themeService = FactoryService.useService(ThemeService)
-const themeColorMode = ref(themeService.getColorMode())
+
+const isDark = useDark({
+  selector: 'html',
+  attribute: 'data-bs-theme',
+  valueDark: 'dark',
+  valueLight: 'light'
+})
+const toggleDark = useToggle(isDark)
 
 const LocalStoreKey: string = 'szramLanguage'
 const getStoredLanguage = localStorage.getItem(LocalStoreKey)
@@ -57,6 +78,7 @@ const getPreferredLanguage = window?.navigator?.language?.includes('pl') ? 'pl' 
 const { locale: language } = useI18n({ useScope: 'global' })
 
 const emit = defineEmits(['beforeChange', 'changed'])
+const prop = defineProps(['links'])
 
 const languageToggled = ref(false)
 
@@ -76,23 +98,10 @@ const changeLanguage = (lang: string) => {
   languageToggled.value = !languageToggled.value
 }
 
-const toggleThemeColor = () => {
-  themeReady.value = false
-  themeService.toggleColorMode()
-
-  nextTick(() => {
-    themeColorMode.value = themeService.getColorMode()
-    themeReady.value = true
-  })
-}
-
 onMounted(() => {
   language.value = getStoredLanguage || getPreferredLanguage
 
-  themeService.setup()
-
   nextTick(() => {
-    themeColorMode.value = themeService.getColorMode()
     themeReady.value = true
   })
 })
