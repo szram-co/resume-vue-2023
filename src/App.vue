@@ -548,7 +548,7 @@ onMounted(async () => {
   await sleep(500)
   recaptchaStatus.value = RECAPTCHA_STATUS.VERIFIED
 
-  await sleep(500)
+  await sleep(1500)
   recaptchaStatus.value = RECAPTCHA_STATUS.DONE
 })
 </script>
