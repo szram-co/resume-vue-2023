@@ -12,22 +12,11 @@ env:
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version:
-          - 20.x
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/setup-node@v3
-        with:
-          node-version: ${{ matrix.node-version }}
-          cache: 'npm'
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
           firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_SZRAM_RESUME }}'
           channelId: live
           projectId: szram-resume
-      - run: npm ci
-      - run: npm run build
-      - run: npm test
