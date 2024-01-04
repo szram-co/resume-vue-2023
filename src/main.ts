@@ -1,8 +1,6 @@
 import './style.scss'
 import 'bootstrap/js/dist/dropdown'
 
-import './firebase'
-
 import { createApp } from 'vue'
 import { MotionPlugin } from '@vueuse/motion'
 
