@@ -2,4 +2,12 @@
   "projects": {
     "default": "szram-resume"
   }
+  "hosting": {
+    "public": "dist",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  }
 }
