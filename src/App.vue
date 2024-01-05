@@ -1,6 +1,5 @@
 <template>
   <div v-if="$t" class="resume-container">
-    x
     <TopHeader :links="data.social" @beforeChange="resumeReady = false" @changed="onThemeChanged" />
 
     <section class="resume-profile">
