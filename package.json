@@ -9,7 +9,8 @@
     "format": "prettier --write src/",
     "preview": "vite preview --host",
     "start": "vite --host",
-    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false"
+    "type-check": "vue-tsc --noEmit -p tsconfig.app.json --composite false",
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
     "@vueuse/core": "^10.7.1",

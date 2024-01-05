@@ -1,17 +1,5 @@
 {
   "projects": {
-    "live": "resume-szram-co",
-    "default": "resume-szram-co",
-    "staging": "resume-szram-co"
-  },
-  "targets": {
-    "resume-szram-co": {
-      "hosting": {
-        "live": [
-          "resume-szram-co"
-        ]
-      }
-    }
-  },
-  "etags": {}
+    "default": "resume-szram-co"
+  }
 }
