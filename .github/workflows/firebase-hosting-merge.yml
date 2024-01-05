@@ -7,8 +7,9 @@ concurrency: production
 on:
   push:
     branches:
-      - master
       - main
+      - develop
+      - beta
 
 jobs:
   build_and_deploy:
