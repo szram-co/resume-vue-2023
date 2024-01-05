@@ -20,6 +20,7 @@ jobs:
         run: |
           npm ci
           npm run build-only --if-present
+      - name: Release
         uses: cycjimmy/semantic-release-action@v2
         with:
           branch: main
