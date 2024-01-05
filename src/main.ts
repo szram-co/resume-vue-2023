@@ -1,5 +1,6 @@
 import './style.scss'
 import 'bootstrap/js/dist/dropdown'
+import { inject } from '@vercel/analytics'
 
 import { createApp } from 'vue'
 import { MotionPlugin } from '@vueuse/motion'
@@ -8,7 +9,6 @@ import { i18n } from './lang'
 import { VueRecaptchaPlugin } from 'vue-recaptcha'
 import AppComponent from './App.vue'
 import { createHead } from '@vueuse/head'
-import { firebaseAnalytics } from '@/firebase'
 
 // create and start the app
 const app = createApp(AppComponent)
@@ -19,5 +19,4 @@ app.use(appHead).use(MotionPlugin).use(i18n).use(VueRecaptchaPlugin, {
 })
 
 app.mount('#app')
-
-const analytics = firebaseAnalytics
+inject()

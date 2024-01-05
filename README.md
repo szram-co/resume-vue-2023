@@ -1,7 +1,5 @@
 # resume-vue-2023
 
-![Latest Deployment Status](https://github.com/szram-co/resume-vue-2023/actions/workflows/firebase-hosting-merge.yml/badge.svg?branch=main&event=push)
-
 This template is designed to help you start developing with Vue 3 in Vite. It includes TypeScript configuration and
 integration with tools like ESLint and Prettier.
 
