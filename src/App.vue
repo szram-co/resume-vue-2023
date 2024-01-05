@@ -292,12 +292,14 @@
       </div>
     </section>
   </div>
+  <SpeedInsights />
 </template>
 
 <script lang="ts" setup>
 import { useChallengeV3, useRecaptchaProvider } from 'vue-recaptcha'
 import TopHeader from './components/TopHeader.vue'
 import SkillsList from './components/SkillsList.vue'
+import { SpeedInsights } from '@vercel/speed-insights/vue'
 
 import { computed, nextTick, onMounted, reactive, ref } from 'vue'
 import { useI18n } from 'vue-i18n'
