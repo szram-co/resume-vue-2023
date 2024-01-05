@@ -1,53 +1,44 @@
 # resume-vue-2023
 
-This template should help get you started developing with Vue 3 in Vite.
+![Latest Deployment Status](https://github.com/szram-co/resume-vue-2023/actions/workflows/firebase-hosting-merge.yml/badge.svg?branch=main&event=push)
 
-## Recommended IDE Setup
+This template is designed to help you start developing with Vue 3 in Vite. It includes TypeScript configuration and
+integration with tools like ESLint and Prettier.
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and
-disable
-Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+**Live Preview:** [https://resume.szram.co/](https://resume.szram.co/)
 
-## Type Support for `.vue` Imports in TS
+## Recommended setup
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for
-type checking. In editors, we
-need [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
-to make the TypeScript language service aware of `.vue` types.
+- [Node Version Manager](https://github.com/nvm-sh/nvm) for use correct versions of node and npm
+- [Vite](https://vitejs.dev/) for _development environment that can finally catch up with you_
+- [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+  TypeScript does not natively support type information for `.vue` imports, so we replace the `tsc` CLI with `vue-tsc`
+  for
+  type checking. In editors, we need
+  the [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin)
+  to make the TypeScript language service aware of `.vue` types.
 
-If the standalone TypeScript plugin doesn't feel fast enough to you, Volar has also implemented
-a [Take Over Mode](https://github.com/johnsoncodehk/volar/discussions/471#discussioncomment-1361669) that is more
-performant. You can enable it by the following steps:
+## Configure
 
-1. Disable the built-in TypeScript Extension
-    1. Run `Extensions: Show Built-in Extensions` from VSCode's command palette
-    2. Find `TypeScript and JavaScript Language Features`, right click and select `Disable (Workspace)`
-2. Reload the VSCode window by running `Developer: Reload Window` from the command palette.
+1. [Install NVM](https://github.com/nvm-sh/nvm?tab=readme-ov-file#installing-and-updating)
+2. Setup Node `nvm install 20`, set as default `nvm alias default 18`
+3. Setup NPM `npm i -g npm`
 
-## Customize configuration
+# Project Setup
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+Install locked dependencies `npm ci`.
 
-## Project Setup
+Run dev server `npm start`
 
-```sh
-npm install
-```
+## Scripts
 
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+| Script       | Description                                        |
+|--------------|----------------------------------------------------|
+| `start`      | Starts the Vite development server.                |
+| `preview`    | Launches a preview of the application.             |
+| `build`      | Runs type-checking and compilation for production. |
+| `build-only` | Compiles the application using Vite.               |
+| `format`     | Formats code using Prettier.                       |
+| `lint`       | Runs ESLint for project files.                     |
+| `type-check` | Runs `vue-tsc` for type-checking.                  |
+| `deploy`     | Builds the application and deploys it to Firebase. |
