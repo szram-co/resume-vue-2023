@@ -1,0 +1,10 @@
+{
+  "hosting": {
+    "target": "live",
+    "public": "dist",
+    "ignore": ["firebase.json", "**/.*", "**/node_modules/**"],
+    "frameworksBackend": {
+      "region": "europe-central2"
+    }
+  }
+}

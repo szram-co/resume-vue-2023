@@ -1,0 +1,15 @@
+{
+  "projects": {
+    "live": "resume-szram-co"
+  },
+  "targets": {
+    "resume-szram-co": {
+      "hosting": {
+        "live": [
+          "resume-szram-co"
+        ]
+      }
+    }
+  },
+  "etags": {}
+}

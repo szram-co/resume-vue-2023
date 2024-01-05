@@ -8,6 +8,7 @@ import { i18n } from './lang'
 import { VueRecaptchaPlugin } from 'vue-recaptcha'
 import AppComponent from './App.vue'
 import { createHead } from '@vueuse/head'
+import { firebaseAnalytics } from '@/firebase'
 
 // create and start the app
 const app = createApp(AppComponent)
@@ -18,3 +19,5 @@ app.use(appHead).use(MotionPlugin).use(i18n).use(VueRecaptchaPlugin, {
 })
 
 app.mount('#app')
+
+const analytics = firebaseAnalytics
