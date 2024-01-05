@@ -1,6 +1,8 @@
 {
   "projects": {
-    "live": "resume-szram-co"
+    "live": "resume-szram-co",
+    "default": "resume-szram-co",
+    "staging": "resume-szram-co"
   },
   "targets": {
     "resume-szram-co": {

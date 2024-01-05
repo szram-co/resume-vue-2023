@@ -5,7 +5,7 @@ import 'firebaseui/dist/firebaseui.css'
 // Initialize Firebase
 firebase.initializeApp({
   apiKey: 'AIzaSyDrRzRoE6PSf4tJNRRWkS1XQdJL_CeqCQ0',
-  authDomain: 'resume.szram.co',
+  // authDomain: 'resume.szram.co',
   projectId: 'resume-szram-co',
   storageBucket: 'resume-szram-co.appspot.com',
   messagingSenderId: '414476963842',
