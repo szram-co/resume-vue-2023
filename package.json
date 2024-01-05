@@ -1,7 +1,8 @@
 {
   "name": "resume-vue-2023",
-  "version": "0.0.0",
-  "private": true,
+  "version": "0.0.1",
+  "author": "Patryk Szram <patryk@szram.co>",
+  "license": "MIT",
   "scripts": {
     "build": "run-p type-check \"build-only {@}\" --",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",

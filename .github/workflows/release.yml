@@ -1,0 +1,32 @@
+name: Release
+concurrency: production
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Use Node 20.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Install & build dependencies
+        run: |
+          npm ci
+          npm run build-only --if-present
+        uses: cycjimmy/semantic-release-action@v2
+        with:
+          branch: main
+          extra_plugins: |
+            @semantic-release/commit-analyzer
+            @semantic-release/release-notes-generator
+            @semantic-release/changelog
+            @semantic-release/github
+        env:
+          GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
