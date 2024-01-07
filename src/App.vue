@@ -384,7 +384,14 @@ const data = reactive({
     'technologies.linuxOsx',
     'technologies.git'
   ],
-  toolsKeys: ['tools.photoshopIllustrator', 'tools.webpackBabel', 'tools.ciCd', 'tools.nodeNpm'],
+  toolsKeys: [
+    'tools.googleCloud',
+    'tools.vercel',
+    'tools.photoshopIllustrator',
+    'tools.webpackBabel',
+    'tools.ciCd',
+    'tools.nodeNpm'
+  ],
   social: {
     github: {
       target: '_blank',
