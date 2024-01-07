@@ -15,6 +15,7 @@
     "experience": "Doświadczenie"
   },
   "skills": {
+    "scrum": "Praca w Scrum/Agile",
     "understandingBusinessGoals": "Zrozumienie celów biznesowych",
     "adaptingToNewTechnologies": "Adaptacja do nowych technologii",
     "planningScalableArchitecture": "Planowanie skalowalnej architektury",
@@ -34,9 +35,11 @@
     "materialUiBootstrap": "Material UI/Bootstrap",
     "pwaSpa": "PWA/SPA",
     "linuxOsx": "LINUX/OS X",
-    "git": "GIT"
+    "git": "Docker/GIT"
   },
   "tools": {
+    "googleCloud": "Google Cloud Platform",
+    "vercel": "Firebase/Vercel",
     "photoshopIllustrator": "Photoshop/Illustrator",
     "webpackBabel": "Webpack/Babel",
     "ciCd": "CI/CD",

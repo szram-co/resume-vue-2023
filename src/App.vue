@@ -329,7 +329,7 @@ const { execute } = useChallengeV3('submit')
 const positionTitle = 'Fullstack Web Developer'
 const contactPhone = ref('+48795884999')
 const contactEmail = ref('patryk@szram.co')
-const resumePdf = computed(() => `/patryk-szram-resume-${locale.value}.pdf`)
+const resumePdf = computed(() => `/patryk-szram-resume-en.pdf`)
 
 const { t, locale } = useI18n({ useScope: 'global' })
 const currentLocation = `${t('city.gdz')}, ${t('country.pl')}`
@@ -362,6 +362,7 @@ function calculatePeriod(start: string, end: string) {
 
 const data = reactive({
   skillsKeys: [
+    'skills.scrum',
     'skills.understandingBusinessGoals',
     'skills.adaptingToNewTechnologies',
     'skills.planningScalableArchitecture',
@@ -383,7 +384,14 @@ const data = reactive({
     'technologies.linuxOsx',
     'technologies.git'
   ],
-  toolsKeys: ['tools.photoshopIllustrator', 'tools.webpackBabel', 'tools.ciCd', 'tools.nodeNpm'],
+  toolsKeys: [
+    'tools.googleCloud',
+    'tools.vercel',
+    'tools.photoshopIllustrator',
+    'tools.webpackBabel',
+    'tools.ciCd',
+    'tools.nodeNpm'
+  ],
   social: {
     github: {
       target: '_blank',
@@ -421,7 +429,7 @@ const data = reactive({
           positionDesc: computed(() => t('jobs.raiffeisen.senior')),
           positionDate: {
             current: true, // TODO: pls change that
-            end: computed(() => `${t('dates.present')}`),
+            end: computed(() => `${t('months.dec').slice(0, 3)} 2023`),
             start: computed(() => `${t('months.jun').slice(0, 3)} 2021`)
           }
         },
@@ -507,8 +515,8 @@ const data = reactive({
           positionDesc: computed(() => t('jobs.flash-media.developer')),
           positionDate: {
             current: false,
-            end: computed(() => `${t('months.nov').slice(0, 3)} 2017`),
-            start: computed(() => `${t('months.mar').slice(0, 3)} 2015`)
+            end: computed(() => `${t('months.mar').slice(0, 3)} 2015`),
+            start: computed(() => `${t('months.nov').slice(0, 3)} 2011`)
           }
         }
       ]
