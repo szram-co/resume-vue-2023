@@ -362,6 +362,7 @@ function calculatePeriod(start: string, end: string) {
 
 const data = reactive({
   skillsKeys: [
+    'skills.scrum',
     'skills.understandingBusinessGoals',
     'skills.adaptingToNewTechnologies',
     'skills.planningScalableArchitecture',
